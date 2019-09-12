@@ -7,7 +7,7 @@
 body {
 	min-width: 600px;
 	color: #000;
-	font-family: "arial";
+	font-family: "calibri";
 	background: url('files/congruent_outline.png') fixed;
 }
 
@@ -27,7 +27,7 @@ body {
 
 .wrapper {
 	display: block;
-	width: 75%;
+	width: 90%;
 	margin: 0 auto;
 	padding-bottom: -20px;
 	//padding-bottom: 0px;
@@ -39,7 +39,7 @@ body {
 
 .left {
 	float: left;
-	width: 75%;
+	width: 70%;
 	padding: 15px 5px;
 	margin-bottom: 20px
 
@@ -56,13 +56,12 @@ body {
 
 
 .entry {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 20px;
-	padding: 10px;
+	padding: 15px;
 	overflow: hidden;
 	line-height: 20px;
-	background: url('files/cork-wallet2.png');
 }
 
 .non-entry {
@@ -147,13 +146,13 @@ form textarea {
 /*         RIGHT         */
 
 .right {
-	width: 20%;
-	float: left;
+	width: 25%;
+	float: right;
 	padding: 2px;
 }
 
 .profile {	
-	width: 70%;
+	width: 60%;
 	margin: 0;
 }
 
