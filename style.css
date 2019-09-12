@@ -27,7 +27,7 @@ body {
 
 .wrapper {
 	display: block;
-	width: 90%;
+	width: 75%;
 	margin: 0 auto;
 	padding-bottom: -20px;
 	//padding-bottom: 0px;
@@ -56,7 +56,7 @@ body {
 
 
 .entry {
-	width: 100%;
+	width: 80%;
 	margin: 0 auto;
 	margin-bottom: 20px;
 	padding: 15px;
@@ -146,13 +146,13 @@ form textarea {
 /*         RIGHT         */
 
 .right {
-	width: 25%;
+	width: 20%;
 	float: right;
-	padding: 2px;
+	padding: 3.5%;
 }
 
 .profile {	
-	width: 60%;
+	width: 70%;
 	margin: 0;
 }
 
