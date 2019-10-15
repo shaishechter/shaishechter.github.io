@@ -1,4 +1,4 @@
-\documentclass[leqno,10pt]{article}
+\documentclass[leqno,11pt,a4paper]{amsart}
 %\input{general}
 
 \usepackage{array,float,hyperref,yhmath, tikz-cd}
@@ -11,6 +11,28 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \urlstyle{rm}
+\usepackage{longtable}
+
+
+\usepackage[
+	maxnames=10,
+	firstinits=true,
+	backend=biber, 
+	url=false, doi=false, isbn=false,
+	style=authortitle, citestyle=verbose-trad1]{biblatex}
+ 	 \AtBeginBibliography{\scriptsize}
+ 
+\addbibresource{MarieCurie.bib}
+%
+%\usepackage{apacite}
+
+\usepackage[left=1.5cm, right=1.5cm, top=1.6cm, bottom=1.7cm]{geometry}
+\usepackage{times}
+\usepackage{lastpage}
+
+\usepackage{stmaryrd}
+\usepackage{fancyhdr}
+
 
 \hypersetup{
   colorlinks=true,
@@ -18,154 +40,416 @@
   linkcolor=black,
   urlcolor=black}
  
+\usepackage{setspace}
+\onehalfspacing
 
-\title{ Shai Shechter}\date{}\author{Curriculum Vitae}
-\begin{document}\maketitle
-\subsection*{General Information}
-\iffalse \begin{wrapfigure}[0]{R}{0.22\textwidth}\vspace{-7.5cm}\begin{center}
-\hskip-30pt\includegraphics[width=.25\textwidth]{shai}
-\end{center}\
-\end{wrapfigure}
-\fi
-\begin{itemize}
-\item\textbf{Corresponding Address}: \\
-\mbox{  Faculty of Mathematics and Computer Science}\\\mbox{   The Weizmann Institute of Science}\\\mbox{  234 Herzl Street}\\ \mbox{   Rehovot, 7610001, Israel}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\newcommand{\rev}[1]{{\color{black}{#1}}}
+
+% adjust row height in tables 
+% 
+\setlength{\extrarowheight}{0.05cm} 
+
+% theorems etc
+
+\theoremstyle{plain}
+ \newtheorem{theorem}{Theorem}[section]
+ \newtheorem{proposition}[theorem]{Proposition}
+ \newtheorem{lemma}[theorem]{Lemma}
+ \newtheorem{corollary}[theorem]{Corollary}
+ \newtheorem{condition}{Condition}[section]
+ \newtheorem{goal}{Goal}
+ \newtheorem{conjecture}[theorem]{Conjecture}
+ \newtheorem{thmABC}{Theorem}
+ \renewcommand{\thethmABC}{\Alph{thmABC}}
+
+\theoremstyle{definition}
+ \newtheorem{definition}[theorem]{Definition}
+ \newtheorem*{notation}{Notation}
+
+\theoremstyle{remark}
+ \newtheorem{assumption}{Assumption}[section]
+ \newtheorem*{claim}{Claim}
+% \newtheorem{condition}{Condition}[section]
+ \newtheorem*{observation}{Observation}
+ \newtheorem{remark}[theorem]{Remark}
+ \newtheorem*{acknowledgements}{Acknowledgements}
+ \newtheorem{question}[theorem]{Question}
+ \newtheorem{example}[theorem]{Example}
+
+
+% various newcommands, abreviations, etc
+%
+
+\newcommand{\car}{\curvearrowright}
+\newcommand{\nl}{\triangleleft}
+\newcommand{\nlgr}{\triangleleft_{\textup{gr}}}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+
+\newcommand{\brem}{\begin{remark}}
+\newcommand{\erem}{\end{remark}}
+
+\newcommand{\bp}{\begin{proof}}
+\newcommand{\ep}{\end{proof}}
+
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\Fp}{\ensuremath{\mathbb{F}_p}}
+\newcommand{\Fq}{\ensuremath{\mathbb{F}_q}}
+%\newcommand{\Fqf}{\ensuremath{\mathbb{F}_{q^f}}}
+\newcommand{\Fpf}{\ensuremath{\mathbb{F}_{p^f}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Zp}{\ensuremath{\mathbb{Z}_p}}
+\newcommand{\Qp}{\ensuremath{\mathbb{Q}_p}}
+\newcommand{\pP}{\ensuremath{\mathbb{P}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
+
+\newcommand{\bfo}{{\bf 1}}
+\newcommand{\bfz}{{\bf 0}}
+
+\newcommand{\bfbeta}{\boldsymbol{\beta}}
+\newcommand{\bflambda}{\boldsymbol{\lambda}}
+\newcommand{\bfphi}{\boldsymbol{\phi}}
+\newcommand{\bfa}{\ensuremath{\mathbf{a}}}
+\newcommand{\bfb}{\ensuremath{\mathbf{b}}}
+\newcommand{\bfe}{\ensuremath{\mathbf{e}}}
+\newcommand{\bfE}{\ensuremath{\mathbf{E}}}
+\newcommand{\bff}{\ensuremath{\mathbf{f}}}
+\newcommand{\bfF}{\ensuremath{\mathbf{F}}}
+\newcommand{\bfg}{\ensuremath{\mathbf{g}}}
+\newcommand{\bfl}{\ensuremath{\mathbf{l}}}
+\newcommand{\bfm}{\ensuremath{\mathbf{m}}}
+\newcommand{\bfn}{\ensuremath{\mathbf{n}}}
+\newcommand{\bfr}{\ensuremath{\mathbf{r}}}
+\newcommand{\bfs}{\ensuremath{\mathbf{s}}}
+\newcommand{\bfS}{\ensuremath{\mathbf{S}}}
+\newcommand{\bfw}{{\boldsymbol{w}}}
+\newcommand{\Frcq}{F_{r,c}(\mathbb{F}_q)}
+\newcommand{\frcq}{\mathfrak{f}_{r,c}(\mathbb{F}_q)}
+
+% boldsymbol looks better than mathbf ... !?
+
+\newcommand{\bfx}{{\boldsymbol{x}}}
+\newcommand{\bfy}{\ensuremath{\mathbf{y}}}
+%\newcommand{\bfz}{\ensuremath{\mathbf{z}}}
+
+\newcommand{\bfB}{\ensuremath{\boldsymbol{B}}}
+\newcommand{\bfG}{\ensuremath{\mathbf{G}}}
+\newcommand{\bfH}{\ensuremath{\mathbf{H}}}
+\newcommand{\bfR}{\ensuremath{\mathbf{R}}}
+\newcommand{\bfU}{\ensuremath{\mathbf{U}}}
+\newcommand{\bfX}{\ensuremath{\mathbf{X}}}
+\newcommand{\bfY}{\ensuremath{\mathbf{Y}}}
+
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcD}{\mathcal{D}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcK}{\mathcal{K}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\mcP}{\mathcal{P}}
+\newcommand{\mcR}{\mathcal{R}}
+\newcommand{\mcRone}{\ensuremath{\mathcal{R}}^{(1)}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcN}{\ensuremath{\mathcal{N}}}
+\newcommand{\mcV}{\ensuremath{\mathcal{V}}}
+
+\newcommand{\calA}{\ensuremath{\mathcal{A}}}
+\newcommand{\calH}{\ensuremath{\mathcal{H}}}
+\newcommand{\mcL}{\ensuremath{\mathcal{L}}}
+\newcommand{\calV}{\ensuremath{\mathcal{V}}}
+\newcommand{\calW}{\ensuremath{\mathcal{W}}}
+
+\newcommand{\mfa}{\ensuremath{\mathfrak{a}}}
+\newcommand{\mff}{\ensuremath{\mathfrak{f}}}
+\newcommand{\mfg}{\ensuremath{\mathfrak{g}}}
+\newcommand{\mfh}{\ensuremath{\mathfrak{h}}}
+\newcommand{\mfk}{\ensuremath{\mathfrak{k}}}
+\newcommand{\mfgp}{\ensuremath{\mathfrak{g}'}}
+\newcommand{\mfu}{\ensuremath{\mathfrak{u}}}
+\newcommand{\mfv}{\ensuremath{\mathfrak{v}}}
+\newcommand{\mfz}{\ensuremath{\mathfrak{z}}}
+
+\newcommand{\SA}{\ensuremath{{S}}}
+\newcommand{\SB}{\ensuremath{{T}}}
+
+\newcommand{\rf}{\ensuremath{{\bf k}}}
+\newcommand{\Rf}{\ensuremath{{\bf K}}}
+
+\newcommand{\fieldK}{\ensuremath{{\mathbb K}}}
+
+\newcommand{\set}[1]{\lbrace#1\rbrace}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\rmat}[1]{\left[\begin{matrix}#1\end{matrix}\right]}
+
+
+\newcommand{\rmN}{\textup{N}}
+\newcommand{\tud}{\textup{d}}
+\newcommand{\upL}{\ensuremath{\textup{L}}}
+\newcommand{\upR}{\ensuremath{\textup{R}}}
+\newcommand{\rk}{\ensuremath{{\rm rk}}}
+\newcommand{\nul}{\ensuremath{{\rm null}}}
+\newcommand{\ol}{\ensuremath{\overline}}
+\newcommand{\ul}{\ensuremath{\underline}}
+
+\newcommand{\disjunion}{\ensuremath{\; \dot{\cup} \;}}
+
+\newcommand{\Ct}{\mathbb{C}\llbracket T \rrbracket}
+\newcommand{\e}{\ensuremath{\gamma}}
+\newcommand{\sym}{\ensuremath{\mathcal{S}}}
+\newcommand{\zirr}{\ensuremath{\zeta^{\rm irr}}}
+\newcommand{\zcc}{\ensuremath{\zeta^{\rm cc}}}
+\newcommand{\Irr}{\ensuremath{\text{Irr}}}
+\newcommand{\wt}{\ensuremath{\widetilde}}
+\newcommand{\wtm}{\ensuremath{\widetilde{m}}}
+\newcommand{\wtB}{\ensuremath{\widetilde{B}}}
+\newcommand{\mcC}{{\mathcal{C}}}
+\newcommand{\tiIrr}{\widetilde{\Irr}}
+\newcommand{\tir}{\tilde{r}}
+
+\newcommand{\tr}{\textup{t}}
+\newcommand{\lri}{\mathfrak o}
+\newcommand{\Lri}{\mathfrak O}
+\newcommand{\lfi}{\mathfrak k}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\smallgri}{\ensuremath{{\scriptscriptstyle \mathcal{O}}}}
+\newcommand{\gri}{\ensuremath{{\scriptstyle \mathcal{O}}}}
+\newcommand{\Gri}{\ensuremath{\mathcal{O}}}
+
+\newcommand{\wtdelta}{\widetilde{\delta}}
+\newcommand{\mfp}{\mathfrak{p}}
+\newcommand{\mfP}{\mathfrak{P}}
+\newcommand{\fS}{\mathcal{S}}
+\newcommand{\hallgenerators}{\Delta}
+\newcommand{\hallbasis}{\mathcal{H}}
+\newcommand{\wh}{\widehat}
+\newcommand{\rarr}{\rightarrow}
+\newcommand{\kk}{\ensuremath{\mathbf{k}}}
+\newcommand{\bj}{\overline{\jmath}}
+\newcommand{\sll}{\mathfrak{sl}}
+\newcommand{\nch}{\varepsilon_n}
+\newcommand{\udots}{\mathinner{\mskip1mu\raise1pt\vbox{\kern7pt\hbox{.}}
+\mskip2mu\raise4pt\hbox{.}\mskip2mu\raise7pt\hbox{.}\mskip1mu}}
+\newcommand{\bigdotcup}{\ensuremath{\mathop{\dot{\bigcup}}}}
+
+\newcommand{\level}{N}
+
+\DeclareMathOperator{\n}{n}
+\renewcommand{\r}{\tilde{r}}
+\DeclareMathOperator{\nega}{neg}
+\DeclareMathOperator{\nsp}{nsp}
+\DeclareMathOperator{\INeg}{INeg}
+\DeclareMathOperator{\Neg}{Neg}
+%\DeclareMathOperator{\nch}{\varepsilon_n}
+\DeclareMathOperator{\rmaj}{rmaj}
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\gp}{gp}
+\DeclareMathOperator{\Des}{Des}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\Fil}{Fil}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Cent}{Cent}
+\DeclareMathOperator{\SubMod}{SubMod}
+\DeclareMathOperator{\SL}{SL}
+%\DeclareMathOperator{\sll}{sl}
+\DeclareMathOperator{\gll}{gl}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\invv}{inv}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Pf}{Pf}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\cha}{char}
+\DeclareMathOperator{\cut}{cut}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\Ig}{Ig}
+\DeclareMathOperator{\IG}{IG}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\cc}{cc}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\weight}{wt}
+\DeclareMathOperator{\GL}{GL}
+%\DeclareMathOperator{\Iden}{Id}
+\DeclareMathOperator{\dl}{dl}
+\DeclareMathOperator{\cd}{cd}
+\DeclareMathOperator{\cs}{cs}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\dep}{dep}
+\DeclareMathOperator{\topo}{top}
+\DeclareMathOperator{\trans}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+% appearance of greek letters
+%
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+%\renewcommand{\mid}{:}
+
+%\pagenumbering{gobble}
+
+\newcommand{\acronym}{RGNilPosChar}
+\newcommand{\type}{MSCA-IF-EF-ST}
+
+
+
+
+\begin{document}
+
+
+%% Start page
+\renewcommand{\thepart}{B-2}
+~
+
+%%Frontmatter
+%\setcounter{page}{11}
+\section*{Curriculum Vitae\\Shai Shechter}
+%\textsf{Change all dates to (dd/mm/yyyy)}
+\subsection*{\color{white}w }
+\subsection*{\sc General Information}~
+\begin{longtable}[H]{p{\textwidth} }
+\textbf{Name}: Shai Shechter
+\\
+\textbf{Date and place of birth}: Haifa, Israel
+\\
+\textbf{Citizenship}: Israeli
+\\
+\textbf{Languages}: Hebrew (native), English (fluent), German (upper-intermediate)
+\\
+\textbf{Marital Status}: Married +1
+\\
+\textbf{ Corresponding Address}:  Faculty of Mathematics and Computer Science,  The Weizmann Institute of Science
+
+ \hskip3.35cm~ 234 Herzl Street,  Rehovot, 7610001, Israel
 %\item\textbf{Phone Number}: +972-507131339.
+\\
+\textbf{E-mail}: \url{shais1985@gmail.com} 
+\\
+\textbf{Website}: \url{https://shaishechter.github.io}
+\end{longtable}
+~\\
+\subsection*{\sc Professional experience}~
+\begin{longtable}{p{0.22\textwidth} p{0.2\textwidth} p{0.54\textwidth}}
 
-\item \textbf{Marital Status}: Married +1
-\item\textbf{E-mail}: \url{shais1985@gmail.com} 
-\item\textbf{Languages}: Hebrew (native), English (fluent), German (advanced learner, B2)
-\end{itemize}
-
-\subsubsection*{Military Service}
-\begin{itemize}
-\item 2004-2007, Paratrooper Reconnaissance Unit
-\end{itemize}
-\subsubsection*{Education}
-\begin{itemize}
-\item\textbf{Doctorate}
-
-Ph.D Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel
-
-\textsc{Thesis}:\textit{ On Regularity and Approximative Regarding the Representation Zeta Functions of Groups}
-
- \textsc{Advisor}: Prof. Uri Onn
- 
- 
-\textsc{Submitted}: October 2018 \quad\textsc{Accepted}: June 2019
-\item\textbf{Graduate}
-
-M.Sc Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel
-
-\textsc{Thesis}:\textit{ The Representation Zeta Function of the Special Linear Group of Certain Division Algebras over a Local Field}
-
-\textsc{Advisor}: Prof. Uri Onn
-
-
-\item\textbf{Undergraduate}
-
-B.Sc Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel, Graduated 2010% (GPA 87.9)
-
-B.A. Psychology and Neuroscience, Ben Gurion University of the Negev, Beer Sheva, Israel, Incomplete% (GPA 91.32)
-
-
-\end{itemize}
-
-\subsubsection*{Teaching}
-\begin{itemize}
-%\item 2010-2012, Personal Tutor, BGU.
-\item 2019- Present day, Teaching assistant (Generalized functions)
-
-Faculty of Mathemtics and Computer Science, The Weizmann Institute of Science
-\item 2012- 2019, Teaching assistant (Discrete mathematics, Linear algebra, Real analysis),
-
-Department of Mathematics, BGU
-
+ 1/11/2019 -- Present day& Teaching assistant& \textbf{Faculty of Mathemtics and Computer Science, WIS,} Generalized functions,
+\\
+20/10/2018 -- Present day& Postdoctoral Fellow&\textbf{Faculty of Mathemtics and Computer Science, WIS}\\
+1/2/2019 -- 30/6/2019& Teaching assistant&
+\textbf{Gateway to academy preparatory school for applicants to engineering degrees from Bedouin communities in the Negev}, Real analysis I\\
+1/10/2011 -- 30/2/2019 & Teaching assistant& \textbf{Department of Mathematics, BGU}, Real analysis I \& II, Algebra I, Discrete Mathematics
+\\
+1/7/2017 -- 30/7/2017& Undergraduate thesis reviewer&\textbf{Ministry of Education}\\
+1/11/2016 -- 30/1/2017& Lecturer &\textbf{
+Department of Education, BGU}, Pre-Calculus for high-school teachers
+\\
+1/8/2014 -- 30/8/2014& Undergraduate thesis reviewer&\textbf{Ministry of Education}\\
 %In previous semesters I also tutored Algebra and Real Analysis.
+7/1/2004 -- 30/1/2007& Military Service& \textbf{Paratrooper Reconnaissance Unit, IDF}, combatant \\
+\end{longtable}
+~\\
+\subsection*{\sc Education}~
+\begin{longtable}{p{.2\textwidth}p{.8\textwidth}}
+\textbf{Doctorate}&
+Ph.D Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel\\
 
-\item 2016, Lecturer (Pre-Calculus for high-school teachers),
+&\textsc{Thesis}:\textit{ On Regularity and Approximative Regarding the Representation Zeta Functions of Groups}\\
 
-Department of Education, BGU
-\end{itemize}
-\section*{Research}
-\subsection*{Papers}
-\subsubsection*{Published or accepted for publication}
-\begin{itemize}
-\item {Regular characters of classical groups over compact discrete valuation rings}, (2017), \textit{J. Pure Appl. Algebra} 223 (201), 4384-4425, \href{https://arxiv.org/abs/1709.01685}{arXiv\texttt{:1709.01685}}
-\item {Enumerating traceless matrices over compact discrete valuation rings}, with A. Carnevale and C. Voll (2017), \textit{Israel J. Math.} 227 (2018), 957-986, \href{https://arxiv.org/abs/1709.02717}{arXiv\texttt{:1709.02717}}
-\item {Characters of the Norm-One Units of Local Division Algebras of Prime Degree}, \textit{Journal of Algebra} 474 (2017), 134-165, \href{https://arxiv.org/abs/1512.02448}{arXiv\texttt{:1512.02448}}
+ 
+&\textsc{Advisor}: Prof. Uri Onn\\
+ 
+ 
+&\textsc{Submitted}: 2/10/2018 \quad\quad\textsc{Accepted}: 4/6/2019\\
+\textbf{Master's}
+&M.Sc Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel\\
+&\textsc{Thesis}:\textit{ The Representation Zeta Function of the Special Linear Group of Certain Division Algebras over a Local Field}\\
 
-\end{itemize}
+&\textsc{Advisor}: Prof. Uri Onn
+\\
 
-%\subsubsection*{Submitted}
+\textbf{Undergraduate}&
 
-\subsection*{Research Talks}
-\begin{itemize}
-\item July 2019- Advanced School Representations of Pro-$p$ Groups, ICMAT, Madrid
-
-\textsc{Topic}- \textit{Approximating the Representation Zeta Function of Finite Groups of Lie-type}
-\item December 2018- Algebraic Seminar, Haifa University
-
-\textsc{Topic}- \textit{Approximating the Representation Zeta Function of Finite Groups of Lie-type}
-\item March 2019- Algebraic Geometry and Representation Theory Seminar, The Weizmann Institute of Science
-
-\textsc{Topic}- \textit{Approximating the Representation Zeta Function of FInite Groups of Lie-type}
-\item June 2017- Contributed talk at \textit{the Fourth International Workshop on Zeta Functions in Algebra and Geometry}, in Bielefeld, Germany
-
-\textsc{Topic}- \textit{On Regular Characters of Classical Groups}
-
-\item June 2016- Algebraic Geometry and Number Theory Seminar, Ben-Gurion University
-
-\textsc{Topic}- \textit{ On Regular Characters of Groups}
-
-\item November 2014- Bar-Ilan Algebra Seminar
-
-\textsc{Topic}- \textit{ Representation Zeta Functions of Norm One Subgroups of a Local Division Algebra}
-
-\item June 2014 -  Poster at the {\it Biccoca Workshop on Representation Theory}, in Milan, Italy
-
-\textsc{Topic}- \textit{ On The Representation Zeta Function for the Group $SL_1(D)$, for $D$ a Division Algebra Over a Local Field}
+B.Sc Mathematics, Ben Gurion University of the Negev, Beer Sheva, Israel, Graduated 2010% (GPA 87.9)\\
+\\
+%&B.A. Psychology and Neuroscience, Ben Gurion University of the Negev, Beer Sheva, Israel, Incomplete% (GPA 91.32)
 
 
-\item September 2013 - Student lecture at the workshop \textit{Zeta Functions of Groups and Related Subjects}, in Padova, Italy
+\end{longtable}
 
-\textsc{Topic} - \textit{On the Representation Zeta Function of the Special Linear Group of Division Algebras over Local Fields}
+\subsection*{\sc Published research papers}~\\
+Citation numbers are based on Google Scholar and exclude self-citations.
+\begin{longtable}{p{.05\textwidth}p{.95\textwidth}} 
+3.&\fullcite{Shechter-Regular} \href{https://arxiv.org/abs/1709.01685}{arXiv\texttt{:1709.01685}} \quad(Citations: 1)\\
 
+2.&\fullcite{CarnevaleShechterVoll} \href{https://arxiv.org/abs/1709.02717}{arXiv\texttt{:1709.02717}}\quad (Citations: 2)\\
+1.
+&\fullcite{Shechter-DivAlgs}
+\href{https://arxiv.org/abs/1512.02448}{arXiv\texttt{:1512.02448}}\end{longtable}
 
+%
+%{\sf
+%\subsubsection{\sf In preparation}
+%
+%Bounds on multiplicities of spherical spaces over finite fields - the general case
+%
+%
+%\noindent Approximating the representation zeta functions of finite groups of Lie-type
+%
+%}
 
-\end{itemize}
+\subsection*{\sc Research Talks}
+\subsubsection*{Invited and contributed presentations}~
+\begin{longtable}{p{.1\textwidth}p{.9\textwidth}}
+23/7/2019&  \textbf{Approximating the Representation Zeta Function of Finite Groups of Lie-type}, \underline{contributed talk} at the \textit{Advanced School on Representations of Pro-$p$ Groups}, ICMAT, Spain
+\\
+1/7/2017& \textbf{On Regular Characters of Classical Groups}, \underline{invited talk} at \textit{the Fourth International Workshop on Zeta Functions in Algebra and Geometry},  Bielefeld University, Germany
+\\
+18/6/2014 &\textbf{On The Representation Zeta Function for the Group $SL_1(D)$, for $D$ a Division Algebra Over a Local Field}
+, \underline{poster} at the {\it Biccoca Workshop on Representation Theory}, UNIMIB, Italy
+\\
+23/9/2013&\textbf{On the Representation Zeta Function of the Special Linear Group of Division Algebras over Local Fields}, \underline{student lecture} at the workshop \textit{Zeta Functions of Groups and Related Subjects}, University of Padova, Italy\\
+\end{longtable}
+\subsubsection*{Selected seminar talks}~
+\begin{longtable}{p{.1\textwidth}p{.9\textwidth}}
+4/3/2019&\textbf{Approximating the Representation Zeta Function of Finite Groups of Lie-type}, Algebra Seminar, Haifa University, Israel\\
+4/12/2018&\textbf{Approximating the Representation Zeta Function of Finite Groups of Lie-type}, Algebraic Geometry and Representation Theory Seminar, The Weizmann Institute of Science, Israel\\
+22/6/2016&\textbf{On Regular Characters of Groups}, Algebraic Geometry and Number Theory Seminar, Ben-Gurion University\\
+5/11/2014&\textbf{Representation Zeta Functions of Norm One Subgroups of a Local Division Algebra}, Algebra Seminar, Bar-Ilan University\end{longtable}
+~\\
+\subsection*{\sc Awards}
+~
+\begin{longtable}{p{.1\textwidth}p{.9\textwidth}}
+8//5/2018 & Hillel Gauchman Scholarship for excellence in mathematical research (10,000 USD)
+\end{longtable}
+~\\
+\subsection*{\sc Funding and Scholarships}~
+\begin{longtable}{p{.22\textwidth}p{.78\textwidth}}
+20/10/2018 -- Present day & Feinberg Graduate School Postdoctoral Fellowship at the Weizmann Insitute of Science\\
+6/7/2014 -- 24/9/2014& Grant for summer visit at the Heinrich Heine University, D\"usseldorf, under the mentorship of Prof.~B.~Klopsch, NRW Scholarship program for students from Israel  \\
+25/2/2014 -- 30/11/2019 & Negev Scholarship for PhD students, Ben-Gurion University- Zin Fellowship\\
+10/7/2011-- 30/10/2011 & Summer Scholarship for outstanding applicants, Mathematics Department, Ben-Gurion University\\
+1/11/2007 -- 1/10/2008 & Suzzane Zlotowski Scholarship for B.Sc students, Ben-Gurion University\\
+\end{longtable}
 
-\iffalse
-\subsection*{General Talks}
-\begin{itemize}
-\item July 2017 - Young algebra day, student seminar at the Weizmann Institute of Science
-
-\textsc{Topic}- \textit{On regular representations of groups}.
-\item July 2017 - Desert Excavations \textit{"Hafirot BaMidbar"} student seminar in mathematics, Ben Gurion University
-
-\textsc{Topic} - \textit{Counting representations of groups}.
-\item April 2017 - Window to mathematics seminar \textit{"Eshnav LeMathematica"}, Ben Gurion University
-
-\textsc{Topic}- \textit{On the $p$-adic Numbers and Their Applications to Counting Problems}
-\end{itemize}
-\fi
-\subsection*{Awards and Scholarships}
-\begin{itemize}
-\item 2018 - Feinberg Graduate School Postdoctoral Fellowship (WIS)
-\item 2018 - Hillel Gauchman Scholarship for excellence in mathematical research
-\item 2014 - NRW Scholarship Program for students from Israel
-\item 2014 - Negev Scholarship - Zin Fellowship
-\item 2010 - Summer Scholarship for outstanding applicants
-\item 2006 - Zlotowski Scholarship for B.Sc students
-\end{itemize}
 \end{document}
-\subsection*{Volunteer and Community Work}
-\begin{itemize}
-%\item 2008-2009 - Tutor in the Perach Program
-\item 2010-2014 - Math Tutor, Ilanot Hostel, Beer Sheva
-\item 2010-2014 - Personal Volunteer Work with an ALS Patient, including activity in the \textit{Prize4Life} association for the benefit of ALS Patients
-\end{itemize}
-\subsection*{Research Interests}
- \tt Representation Theory, Algebraic Number theory, Algebraic groups, Model Theory, Algebraic Geometry.
-\end{document}
-
