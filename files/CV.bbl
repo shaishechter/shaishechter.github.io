@@ -1,0 +1,142 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{CarnevaleShechterVoll}{article}{}
+      \name{author}{3}{}{%
+        {{hash=db4f6d71ba3cc8728d16a78335b06881}{%
+           family={Carnevale},
+           familyi={C\bibinitperiod},
+           given={Angela},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8401c074bede023e347d5f9e1c66882b}{%
+           family={Shechter},
+           familyi={S\bibinitperiod},
+           given={Shai},
+           giveni={S\bibinitperiod}}}%
+        {{hash=169a8161a7c3aea82f85794edfe40c76}{%
+           family={Voll},
+           familyi={V\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \strng{fullhash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \strng{bibnamehash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \strng{authorbibnamehash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \strng{authornamehash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \strng{authorfullhash}{a93700d2b3bf7c8bfc5e6dcaf7fd70c4}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0021-2172}
+      \field{journaltitle}{Israel J. Math.}
+      \field{number}{2}
+      \field{title}{Enumerating traceless matrices over compact discrete valuation rings}
+      \field{volume}{227}
+      \field{year}{2018}
+      \field{pages}{957\bibrangedash 986}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1007/s11856-018-1755-4
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s11856-018-1755-4
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s11856-018-1755-4
+      \endverb
+    \endentry
+    \entry{Shechter-DivAlgs}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8401c074bede023e347d5f9e1c66882b}{%
+           family={Shechter},
+           familyi={S\bibinitperiod},
+           given={Shai},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{fullhash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{bibnamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authorbibnamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authornamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authorfullhash}{8401c074bede023e347d5f9e1c66882b}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0021-8693}
+      \field{journaltitle}{J. Algebra}
+      \field{title}{Characters of the norm-one units of local division algebras of prime degree}
+      \field{volume}{474}
+      \field{year}{2017}
+      \field{pages}{134\bibrangedash 165}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.1016/j.jalgebra.2016.11.004
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.jalgebra.2016.11.004
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.jalgebra.2016.11.004
+      \endverb
+    \endentry
+    \entry{Shechter-Regular}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8401c074bede023e347d5f9e1c66882b}{%
+           family={Shechter},
+           familyi={S\bibinitperiod},
+           given={Shai},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{fullhash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{bibnamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authorbibnamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authornamehash}{8401c074bede023e347d5f9e1c66882b}
+      \strng{authorfullhash}{8401c074bede023e347d5f9e1c66882b}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0022-4049}
+      \field{journaltitle}{J. Pure Appl. Algebra}
+      \field{number}{10}
+      \field{title}{Regular characters of classical groups over complete discrete valuation rings}
+      \field{volume}{223}
+      \field{year}{2019}
+      \field{pages}{4384\bibrangedash 4425}
+      \range{pages}{42}
+      \verb{doi}
+      \verb 10.1016/j.jpaa.2019.01.013
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.jpaa.2019.01.013
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.jpaa.2019.01.013
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
