@@ -1,0 +1,160 @@
+\documentclass[11pt, reqno,a4paper, twoside]{amsproc}
+\usepackage{ifpdf}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm, amssymb,bm}
+\usepackage[margin=1.5 cm, top=0cm]{geometry}
+%usepackage{fullpage}
+\usepackage{ucs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  filecolor=red}
+  
+  
+\include{aliascnt}
+
+
+%%% Famous group schemes
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\matr}{M}
+
+
+%% Common Operators
+
+\DeclareMathOperator{\Gal}{\bf Gal}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{Aut}
+\newcommand{\Span}{\operatorname{Span}}
+\DeclareMathOperator{\spec}{Spec}
+
+\renewcommand{\ker}{\mathrm{Ker}}
+\newcommand{\coker}{\mathrm{Coker}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\rad}{\mathrm{Rad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\Ql}{\underline{\dbQ_\ell}}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Cen}{\ensuremath{\mathrm{C}}}
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\cl}[1]{\mathrm{cl}\left(#1\right)}
+%\newcommand{\cl}[1]{\overline{#1}}
+
+\renewcommand{\L}{\mcal{L}}
+%% Famous Fields, Rings, Sets etc.
+
+\renewcommand{\O}{\varnothing}
+\newcommand{\dbN}{\mathbb N}
+\newcommand{\dbZ}{\mathbb Z}
+\newcommand{\dbF}{\mathbb F}
+\newcommand{\dbQ}{\mathbb Q}
+\newcommand{\dbR}{\mathbb R}
+\newcommand{\dbC}{\mathbb C}
+\newcommand{\dbA}{\mathbb A}
+\newcommand{\dbP}{\mathbb P}
+
+\newcommand{\kk}{k}
+\newcommand{\B}{\mcal{B}}
+
+\newcommand{\frob}{\sigma}
+
+%% Common Unary Functions
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inner}[1]{\left(#1\right)}
+
+
+%% Shorter font named
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mfr}{\mathfrak}
+\newcommand{\msf}{\mathsf}
+
+\newcommand{\widebar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+%% 
+\renewcommand{\thesubsection}{Exercise~\arabic{subsection}}
+\title{Generalized functions\\Exercise sheet 1}
+\begin{document}\maketitle
+
+Solve the following exercises. Exercises marked with $*$ are optional. A good additional reference is Terence Tao's notes, available at: 
+\url{https://terrytao.wordpress.com/2009/04/19/245c-notes-3-distributions/}
+\subsection{}Fix $1\le p<\infty$.
+\begin{enumerate}\renewcommand{\theenumi}{\alph{enumi}}
+\item 
+Show that $L^1(\dbR)\ast L^p(\dbR)\subseteq L^p(\dbR)$.
+\item 
+Show that compactly supported bounded functions form a dense subset of $L^p(\dbR)$, with respect to $\norm{\cdot}_p$. \textit{Hint}: Given $f\in L^p(\dbR)$, consider the functions $f_n=f\cdot I_{\set{x:\abs{x}<n\:f(x)<n}}$, where $I_\bullet$ denotes the indicator function.
+ %More specifically, given $f\in L^1(\dbR)$ and $g\in L^p(\dbR)$, show $\norm{f\ast g}_p\le \norm{f}_1\cdot\norm{g}_p$. 
+\item 
+Prove that $C_c^\infty(\dbR)$ is dense in $L^p(\dbR)$, with respect to $\norm{\cdot}_p$.
+\item ($*$) 
+Is the inclusion $C_c(\dbR)\hookrightarrow L^p(\dbR)$ continuous with respect to the uniform convergence topology on the domain?
+\end{enumerate}
+
+\subsection{} Compute the generalised function $x^n\delta_0^{(m)}$, for any $n,m\in\dbN$.
+
+\subsection{} ($*$) We showed in class that given $f,g\in C_c^\infty(\dbR)$, we have an inclusion $\supp(f\ast g)\subseteq \supp(f)+\supp (g)$. Find an example of $f,g\in C_c^\infty(\dbR)$ for which this inclusion is strict.
+
+\subsection{}Let $\xi\in C^{-\infty}(\dbR)$. Given $U\subseteq\dbR$, the notation $\xi\mid_U\equiv 0$ means $\gen{\xi,f}=0$ for all $f\in C_c^\infty(U)$. 
+\begin{enumerate}
+\item  Let $U_1,U_2\subseteq\dbR$ be open. Show that if $\xi\mid_{U_1}\equiv\xi\mid_{U_2}\equiv 0$ the $\xi\mid_{U_1\cup U_2}\equiv 0$.
+\item Show that if $\set{U_\alpha}_{\alpha_I}$ is a collection of arbitrary cardinality of open subsets of $\dbR$ with compact closures and $\xi\mid_{U_\alpha}\equiv 0$ for all $\alpha\in I$, then $\xi\mid_{\bigcup_\alpha U_\alpha}\equiv 0$. 
+\end{enumerate}
+
+
+\subsection{}
+\begin{enumerate}
+\item Given $D\subseteq\dbR$ compact and $k\ge 0$, the $C^k$-norm on $C^k(D)$ is defined by $\norm{f}_{C^k}:=\sup_{x\in D}\sum_{i=1}^k \norm{f^{(i)}(x)}$. Show that a functional $\xi:C_c^\infty(\dbR)\to\dbR$ is continuous if and only if there exists $k\ge 0$ and $c>0$ such that \[\abs{\gen{\xi,f}}\le c\norm{f}_{C^k}\quad\text{for all }f\in C^\infty(D).\]
+
+Deduce that for any $\xi\in C^{-\infty}(\dbR)$ and $D\subseteq \dbR$ compact, there exists $k_D\ge 0$ and $c_D>0$ such that $\abs{\gen{\xi,f}}\le c_D\norm{f}_{C^{k_D}}$, whenever $\supp(f)\subseteq D$. 
+\item Let $\xi$ be a distribution supported on $\set{0}$. 
+\begin{enumerate}
+\item Let $\psi\in C_c^{\infty}(\dbR)$ with $\supp(\psi)\subseteq[-1,1]$ and such that $\psi\mid_U\equiv 1$ for some open $U\ni 0$. Show that $\gen{\xi,g}\le c \sup_{x\in [-1,1]}\sum_{i=1}^k\abs{(g\psi)^{(i)}(x)}$, for all $g\in C_c^\infty(\dbR)$, for suitable $k\ge 0$ and $c>0$.
+\item Prove that there exist $k\ge 0$ such that $x^k\xi\equiv 0$. 
+
+\textit{Hint}: Use the previous item to bound the value $\gen{x^k\xi,f}=\gen{\xi,x^kf}$ using test functions of the form $\psi_\epsilon(x)=\psi(\epsilon^{-1}x)$, with $\psi$ as above.
+\end{enumerate}
+\end{enumerate}
+
+\subsection{}Let $\xi\in C^{-\infty}(\dbR)$ and $f\in C^\infty(\dbR)$. Prove the following assertions.
+\begin{enumerate}
+\item If $f$ has compact support then $\xi\ast f$ smooth.
+\item If $\xi$ has compact support then $\xi\ast f$ is smooth.
+\end{enumerate}
+
+%\subsection{}Let $\xi\in C^{-\infty}(\dbR)$ and $f\in C^\infty(\dbR)$. Show that if $\supp(\xi)$ is compact, then $\xi\ast f$ is smooth.
+
+\subsection{}Let $A$ be a differential operator with constant coefficients. 
+\begin{enumerate}
+\item Describe the Green function ($G_A$ such that $A(G_A)=\delta_0$) without using generalized functions.
+\item Set \[A_{G_A}(g)(y)=\int_{-\infty}^\infty G_A(x,y)g(x)dx.\]
+Show that $A(A_{G_A}(g))=g$ for every $g\in C_c^\infty(\dbR)$. 
+
+\end{enumerate}
+\end{document}

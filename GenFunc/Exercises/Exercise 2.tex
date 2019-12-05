@@ -1,0 +1,175 @@
+\documentclass[11pt, reqno,a4paper, twoside]{amsproc}
+\usepackage{ifpdf}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm, amssymb,bm}
+\usepackage[margin=1.4 cm, top=0cm]{geometry}
+%usepackage{fullpage}
+\usepackage{ucs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  filecolor=red}
+  
+  
+\include{aliascnt}
+
+
+%%% Famous group schemes
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\matr}{M}
+
+
+%% Common Operators
+
+\DeclareMathOperator{\Gal}{\bf Gal}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{Aut}
+\newcommand{\Span}{\operatorname{Span}}
+\DeclareMathOperator{\spec}{Spec}
+
+\renewcommand{\ker}{\mathrm{Ker}}
+\newcommand{\coker}{\mathrm{Coker}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\rad}{\mathrm{Rad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\Ql}{\underline{\dbQ_\ell}}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Cen}{\ensuremath{\mathrm{C}}}
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\cl}[1]{\mathrm{cl}\left(#1\right)}
+%\newcommand{\cl}[1]{\overline{#1}}
+
+\renewcommand{\L}{\mcal{L}}
+%% Famous Fields, Rings, Sets etc.
+
+\renewcommand{\O}{\varnothing}
+\newcommand{\dbN}{\mathbb N}
+\newcommand{\dbZ}{\mathbb Z}
+\newcommand{\dbF}{\mathbb F}
+\newcommand{\dbQ}{\mathbb Q}
+\newcommand{\dbR}{\mathbb R}
+\newcommand{\dbC}{\mathbb C}
+\newcommand{\dbA}{\mathbb A}
+\newcommand{\dbP}{\mathbb P}
+
+\newcommand{\kk}{k}
+\newcommand{\B}{\mcal{B}}
+
+\newcommand{\frob}{\sigma}
+
+%% Common Unary Functions
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inner}[1]{\left(#1\right)}
+
+
+%% Shorter font named
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mfr}{\mathfrak}
+\newcommand{\msf}{\mathsf}
+
+\newcommand{\widebar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+%% Acronyms
+
+\newcommand{\lctvs}{locally convex topological vector space}
+\newcommand{\ocb}{open, balanced, and convex}
+%% 
+\renewcommand{\thesubsection}{Exercise~\arabic{subsection}}
+\title{Generalized functions\\Exercise sheet 2}
+\begin{document}\maketitle
+
+\subsection{}Let $V$ be a finite dimensional topological vector space over $\dbR$. Prove that, if $V$ is Hausdorff, then $V$ is homeomorphic to $\dbR^{\dim V}$.
+
+\subsection{} Let $V$ be a \lctvs. Show that the following conditions are equivalent for $V$ Hausdorff:
+\begin{enumerate}
+	\item $V$ is metrizable. 
+	\item $V$ is first countable; i.e.\ , that each point $v\in V$ has a countable neighborhood basis.
+	\item  There exists a countable family of seminorms $\set{\nu_i}_{i\in\dbN}$ which defines the topology on $V$.
+\end{enumerate}
+Conclude that a \lctvs $V$ is Fr\'echet if and only if it is complete and satisfies either of the conditions above.
+
+{\it Hint for the implication (3)$\Rightarrow$(2)}: show that a seminorm $\nu$ on $V$ gives rise to a \emph{bounded} map $d_\nu(x,y)=\frac{\nu(x-y)}{1+\nu(x-y)}$ on $V$, which satisfies all metric axioms except for the fact that $d_\nu(x,y)=0$ does not imply $x\ne y$. What can you say about $\sum_{i=1}^\infty 2^{-i}d_{\nu_i}(\cdot,\cdot)$?
+
+\subsection{}
+Let $V$ be a topological vector space over $\dbR$, and $0\in U\subseteq V$ a open and convex. 
+\begin{enumerate}
+	\item Show that $U$ is balanced (i.e.\ $\lambda U\subseteq U$ whenever $\abs{\lambda}\le 1$) if and only if $U$ is symmetric (i.e.\ $U=-U$).
+	\item Show that there exists an open, convex and \textit{balanced} set $W\subseteq U$ with $0\in W$. 
+\end{enumerate}
+
+\subsection{}
+Let $V$ a topological vector space over $\dbR$, and let $0\in C$ be an open, balanced and convex subset.
+\begin{enumerate}
+	\item Show that $N_C(v):=\inf\set{\lambda\in\dbR_{> 0}: \lambda^{-1} v\in C}$ defines a seminorm on $V$.
+	\item  Assume further that $V$ is normed and $C$ is bounded. Show that $N_C$ defines a norm on $V$. 
+	\item  With the assumptions of (2), let $\norm{\cdot}$ denote the norm of $V$. Show that $N_C$ is equivalent to $\norm{\cdot}$, i.e.\ there exist $c_1,c_2>0$ such that $c_1 N_C(v)\le \norm{v}\le c_2 N_C(v)$ for all $v\in V$. 
+	
+	\textit{Hint}: Consider the values $\sup\set{\norm{u}:u\in C}$ and $\inf\set{\norm{u}:u\notin C}$. 
+	\item Find a \lctvs~that admits no continuous norm.
+\end{enumerate}
+
+\subsection{}
+Given a topological vector space $V$ over $\dbR$, let $V^\sharp$ denote the complete dual of $V$ (i.e. the space of all linear maps $V\to\dbR$) and $V^*$ denote the continuous dual of $V$.
+
+Let $W\subseteq V$ be \lctvs s.
+\begin{enumerate}
+	\item Show that the restriction map $V^\sharp\to W^\sharp$ is surjective.
+	\item Show that the restriction map $V^*\to W^*$ is surjective.
+\end{enumerate}
+\subsection{}
+Let $V,\bar{V}$ be topological vector spaces, with $\bar{V}$ complete , and a continuous linear map $\iota:V\to \bar{V}$. 
+\begin{enumerate}
+	\item * Show that a subspace $W\subseteq \bar{V}$ is closed if and only if it is complete.
+	\item 	Show that the following are equivalent.
+	\begin{enumerate}
+		\item $\iota$ is a homeomorphism of $V$ onto $\iota(V)$, and $\iota(V)$ is dense in $\bar{V}$.
+		\item For every complete space $W$ and any map $f:V\to W$, there exists a unique map $F:\bar{V}\to W$ such that $f=F\circ \iota$. 
+	\end{enumerate}
+	A space $\bar{V}$ satisfying the above conditions is called the \textit{completion} of $V$. 
+	
+	\textit{Remark:} You may use the conclusions of items (1) and (3) in the proof of (2), even if you choose not to submit them.
+	\item * Construct the completion of $V$ (see \cite[Theorem 5.2]{treves}).
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}
+	\item* Let $V$ be a \lctvs. Show that if $V$ is first countable and sequentially complete, then $V$ is complete.
+	\item Prove that $C^{\infty}(\dbR)$ is complete. 
+\end{enumerate}
+
+
+\begin{thebibliography}{10}
+\bibitem{treves}
+Tr\`eves, Fran\c{c}ois,\textit{ Topological vector spaces, distributions and kernels}, Academic Press, New York-London, {1967}.
+\end{thebibliography}
+
+\end{document}
+ 

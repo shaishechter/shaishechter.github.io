@@ -1,0 +1,288 @@
+\documentclass[12pt, draft,reqno,a4paper, twoside]{amsproc}
+\usepackage{ifpdf}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm, amssymb,bm}
+\usepackage{geometry}
+\usepackage{fullpage}
+\usepackage{ucs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  filecolor=red}
+  
+  
+\include{aliascnt}
+
+
+%%% Famous group schemes
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\matr}{M}
+
+
+%% Common Operators
+
+\DeclareMathOperator{\Gal}{\bf Gal}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{Aut}
+\newcommand{\Span}{\operatorname{Span}}
+\DeclareMathOperator{\spec}{Spec}
+
+\renewcommand{\ker}{\mathrm{Ker}}
+\newcommand{\coker}{\mathrm{Coker}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\rad}{\mathrm{Rad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\Ql}{\underline{\dbQ_\ell}}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Cen}{\ensuremath{\mathrm{C}}}
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\cl}[1]{\mathrm{cl}\left(#1\right)}
+%\newcommand{\cl}[1]{\overline{#1}}
+
+\renewcommand{\L}{\mcal{L}}
+%% Famous Fields, Rings, Sets etc.
+
+\renewcommand{\O}{\varnothing}
+\newcommand{\dbN}{\mathbb N}
+\newcommand{\dbZ}{\mathbb Z}
+\newcommand{\dbF}{\mathbb F}
+\newcommand{\dbQ}{\mathbb Q}
+\newcommand{\dbR}{\mathbb R}
+\newcommand{\dbC}{\mathbb C}
+\newcommand{\dbA}{\mathbb A}
+\newcommand{\dbP}{\mathbb P}
+
+\newcommand{\kk}{k}
+\newcommand{\B}{\mcal{B}}
+
+\newcommand{\frob}{\sigma}
+
+%% Common Unary Functions
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inner}[1]{\left(#1\right)}
+
+
+%% Shorter font named
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mfr}{\mathfrak}
+\newcommand{\msf}{\mathsf}
+
+\newcommand{\widebar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+%% 
+
+\title{Generalized functions\\Tutorial notes}
+\begin{document}\maketitle
+\part{Tutorial 1}
+\section{Technical issues}
+\begin{enumerate}
+\item Tutor: Shai Shechter;
+\item Office, and office hours: Goldsmith 210, OH to be coordinated by mail;
+\item Tutorial notes are available on \url{https://shaishechter.github.io/};
+\item Lecture notes distributed by mail ({\tt create mailing list}).
+\end{enumerate}
+
+\section{Basic definitions and properties}
+\begin{defi}\label{defi:smooth-support}
+\begin{enumerate}
+\item 
+Let $C^\infty(\dbR)$ denote the space of smooth functions on $\dbR$, i.e. functions $f:\dbR\to \dbR$ which have derivatives of any order at any $x\in \dbR$.
+\item For a function $f:\dbR\to\dbR$ define the \textit{support} of $f$ to be
+\[\supp(f)=\cl{\set{x\in\dbR:f(x)\ne 0}}.\]
+\item Let $C_c^\infty(\dbR)\subseteq C^\infty (\dbR)$ denote the space of smooth functions on $\dbR$ with \textit{compact support}.
+\end{enumerate}
+\end{defi}
+
+\begin{exer}\label{exer:Ccinfty-non-empty}Prove $C_c^\infty(\dbR)\ne 0$.
+\end{exer}
+\begin{proof}[\it Solution] We show the following:
+\begin{quotation}
+For any $a<b$ real numbers, there exists a function $f_{a,b}\ne 0$ such that $\supp (f_{a,b})=[a,b]$. 
+\end{quotation}
+
+Fix $a\in \dbR$, and define \[h_a(x)=e^{-1/(x-a)^2}\cdot \delta_{x> a}(x)=\begin{cases}e^{-1/(x-a)^2}&\text{if }x> a\\0&\text{otherwise}\end{cases}.\]
+The following are easy:
+\begin{enumerate}
+\item $h_a(x)=0$ if $x<a$ and $h_a(x)>0$ if $x\le a$;
+\item $h_a(x)>0$ if $x>a$ and $\lim_{x\to a^+}h_a(x)=0$; In particular, $h_a(x)$ is continuous;
+\item $\lim_{x\to +\infty}h_a(x)=1$.
+\end{enumerate}
+We show $h_a(x)\in C^\infty(\dbR)$. Once, we have this, we may take $f_{a,b}(x)=h_a(x)\cdot h_{-b}(-x)$. 
+
+Since $h_a(x)=h_0(x-a)$, it suffices to verify that $h_0(x)=e^{-1/x^2}\in C^\infty(\dbR)$. We show that the $k$-th derivative of $h_0$ is continuous on $\dbR$ for any $k\in\dbN$. 
+\begin{claim} For any $k\in\dbN$, there exists a polynomial $p_k(x)$ of degree $<3k$ such that in the domain $x\ne 0$
+\[h_0^{(k)}(x)=\frac{p_k(x)}{x^{3k}}h_0(x).\]
+\end{claim}
+\begin{proof}[\it Proof of claim]\renewcommand{\qedsymbol}{}
+In the domain $x<0$ $h_0$ is constant zero, so there is nothing to prove. For $x>0$ we argue by induction on $k$, the case $k=1$ being true since $h'_0(x)=\frac{2}{x^3}h_0(x)$ in this domain. The induction step is:
+\begin{multline*}
+h^{(k+1)}_0(x)=\frac{p_k'(x)x^{3k}-3kx^{3k-1}p_k(x)}{x^{6k}}h_0-\frac{p_k(x)}{x^{3k}}h_0'(x)\\
+=\left(\frac{p'_k(x)x^3-3kx^2p_k(x)-2p_k(x)}{x^{3k+3}}\right)e^{-1/x^2}
+\end{multline*}
+and the denominator on the LHS has degree $\le \deg p_k+2<3k+3$. 
+\end{proof}
+The smoothness of $h_0$ follows from the following fact, left as a home-exercise.
+\begin{claim}$\lim_{x\to 0}\frac{1}{x^m}e^{-1/x^2}=0$ for any $m\in\dbN$. 
+\end{claim}
+In particular, the two claims imply that 
+\[\lim_{x\to 0^{-}}h_0^{(k)}(x)=\lim_{x\to 0^{+}}h_0^{(k)}(x)=0,\]
+for any $k\in\dbN$. 
+\end{proof}
+
+\begin{defi}
+Given absolutely differentiable functions $f,g:\dbR\to\dbR$ one may define the convolution of $f$ and $g$ to be
+\[(f\ast g)(t)=\int_{-\infty}^\infty f(t-x)g(x)dx=\int_{-\infty}^\infty f(x)g(t-x)dx.\]
+\end{defi}
+
+\begin{exam}
+For example, if $f$ is continuous and $g=I_{[0,1]}$, where $I_{[0,1]}$ is the indicator function of $[0,1]$, then 
+\begin{equation}\label{equation:convolution}
+(f\ast g)(t)=\int_{t}^{t-1}f(x)dx.
+\end{equation}That is, $f\ast g$ is obtained from $f$ by summing over a sliding window of width $1$.
+\end{exam}
+
+\begin{rem}
+Note that $f\ast g$ is again absolutely integrable on $\dbR$, as
+\begin{multline*}\int_{-\infty}^\infty\abs{f\ast g(t)}dt\le\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\abs{f(t-x)g(x)}dxdt\\
+=\int_{-\infty}^\infty \abs{g(x)}\left(\int_{-\infty}^\infty\abs{f(t-x)}dt\right)dx=\norm{g}_1\cdot \norm{f}_1,
+\end{multline*}
+where the penultimate equality follow from Tonelli's Theorem.
+\end{rem}
+
+In more compact form- $L^1(\dbR)\ast L^1(\dbR)\subseteq L^1(\dbR)$. The next exercise proves two additional inclusions of this form.
+\begin{exer}\label{exer:conv-properties}
+\begin{enumerate}
+\item Show that convolution is commutative and associative.
+\item Given $f,g\in L^1(\dbR)$ with $f$ differentiable with compact support, show that $(f\ast g)'=f'\ast g$. Deduce $C^\infty_c\ast L^1(\dbR)\subseteq C^\infty (\dbR)$. Can we have $\subseteq C_c^\infty(\dbR)$?
+\item Given $f,g\in C_c^\infty(\dbR)$, show $\supp(f\ast g)\subseteq \supp(f)+\supp(g)$, where $X+Y=\set{x+y:x\in X,y\in Y}$ is the \emph{Minkowski sum}. Is this an equality? Deduce $C_c^\infty(R)\ast C_c^\infty(\dbR)\subseteq C_c^\infty(\dbR)$. 
+\end{enumerate}
+\end{exer}
+\begin{proof}[\it Solution]
+\begin{enumerate}
+\item Both assertions follow by change of variable; see \eqref{equation:convolution}.
+%Associativity:
+%\begin{multline*}
+%(f\ast g)\ast h(t)=\int_{\dbR}(f\ast g)(t-x) h(x)dx\\=
+%\int_\dbR\int_{\dbR} f(y)g(t-x-y)dy h(x)dx\\=
+%\int_\dbR \left(\int_\dbR g((t-y)-x)h(x)dx\right)f(y)dy\\
+%\int_{\dbR}f(y)(g\ast h)(t-y)dy=f\ast(g\ast h)(t)
+%\end{multline*}
+\item We have, for any $t\in \dbR$ and $\epsilon>0$, 
+\begin{equation}\label{equation:integrand-smooth-conv}
+\frac{f\ast g(t+\epsilon)-f\ast g(t)}{\epsilon}=\int_{-\infty}^\infty \left(\frac{f(t+\epsilon-x)-f(t-x)}{\epsilon}\right)g(x)dx.
+\end{equation}
+Taking $\lim$ as $\epsilon\to 0$, the claim would follow if we can justify replacing the limit and the integral. 
+
+Note that, as $\supp(f)$ is compact and $f$ is differentiable, we have that 
+\[M=\sup_{\substack{y\in\supp (f)\\\epsilon\in (0,1]}}\abs{\frac{f(y+\epsilon)-f(y)}{\epsilon}}<\infty;\]
+(home exercise; \textit{hint}: $F(y,\epsilon)=\frac{f(y+\epsilon)-f(y)}{\epsilon}$ extends to a continuous function on a compact set in $\dbR^2$). In particular, if $0<\epsilon\le 1$ then the integrand in \eqref{equation:integrand-smooth-conv} is bounded above by $H(x)=M\cdot g(x)$, which is absolutely integrable, since $g$ is. In particular, by the Dominated Convergence Theorem, we have that 
+\begin{multline*}(f\ast g)'(t)=\lim_{\epsilon\to 0}\frac{f\ast g(t+\epsilon)-f\ast g(t)}{\epsilon}\\
+=\lim_{\epsilon\to 0}\int_{-\infty}^\infty\left(\frac{f(t+\epsilon-x)-f(t-x)}{\epsilon}\right)g(x)dx\\=\int_{-\infty}^\infty\lim_{\epsilon\to 0}
+\left(\frac{f(t+\epsilon-x)-f(t-x)}{\epsilon}\right)g(x)dx=f'\ast g(t)
+\end{multline*}
+The assertion $C_c^\infty(\dbR)\ast L^1(\dbR)\subseteq C^\infty(\dbR)$ follows easily. The inclusion into $C^\infty_c(\dbR)$ does not hold (home exercise).%, since, for example, if we take $f\in C_c^\infty$ to be non-negative and $g$ to be strictly positive, then $f\ast g$ would be strictly positive as well. 
+\item Let $t\notin \supp(f)+\supp(g)$, we want to show $f\ast g(t)=0$. Indeed, if $f\ast g(t)\ne 0$ then
+\[f\ast g(t)=\int_{-\infty}^\infty f(t-x)g(x)dx\ne 0,\]
+which implies, in particular, that the function $f(t-x)g(x)$ is not everywhere zero. In particular, there exists $x\in \dbR$ such that both $f(t-x),g(x)\ne =0$, i.e. $x\in \supp(g)$ and $t-x\in\supp (f)$. But then
+\[t=(t-x)+x\in \supp(f)+\supp(g),\]
+a contradiction. 
+
+The inclusion $\supp(f\ast g)\subseteq\supp(f)+\supp(g)$ may be strict. As a non-example, we may take $f(x)=x\cdot I_{[-1,1]}$ and $g(x)=I_{[-2,2]}$, for which $\supp(f)=[-1,1],\:\supp[g]=[-2,2]$ and $\supp(f)+\supp(g)=[-6,6]$, but $(-1,1)\cap\supp(f\ast~ g)=\O$. These are, of course, non-smooth compactly supported functions, but examples in $C_c^\infty(\dbR)$ also exist (home exercise: find such!). 
+
+Lastly, the inclusion $C_c^\infty(\dbR)\ast C_c^\infty(\dbR)\subseteq C_c^\infty(\dbR)$, follows from the continuity of addition, as a map $\dbR^2\to\dbR$ (maps the compact set $\supp(f)\times\supp (g)$ onto a compact set). Note that, in general, if $X$ and $Y$ are closed (but not compact) then $X+Y$ may not be closed (e.g. $X=\set{(x,y):xy=1},\:Y=\set{(x,y):x=0}\subseteq\dbR^2$).
+%For example, if we take $\varphi\in C_c^\infty(\dbR)$ to be an \textit{even} function such that $\varphi(x)=1$ if $\abs{x}<1$ and $=0$ if $\abs{x}>2$ (see \autoref{exer:smooth-urysohn}), and put $f(x)=x\cdot \varphi(x)$ and $g(x)=\varphi(\frac{x}{3})$ then \[\supp(f)=[-2,2],\:\supp(g)=[-6,6],\:\text{and}\:\supp(f)+\supp(g)=[-8,8],\]
+%but, for any $t\in (-1,1)$
+%\begin{multline*}
+%(f\ast g)(t)=\int_{-6}^6 f(t-x)g(x)dx\\
+%=\underbrace{\int_{-6}^{-3}f(t-x)g(x)dx}_{t-x>2}+\underbrace{\int_{-3}^3 f(t-x)g(x)dx}_{g(x)=1}+\underbrace{\int_3^6f(t-x)g(x)dx}_{t-x<-2}.
+%\end{multline*}
+%Noting that the first and third integral vanish, since $t-x\notin\supp (f)$, and that the second integral vanishes since $\set{t-x:x\in (-3,3)}\supseteq [-2,2]$ for any $t\in (-1,1)$, and $f$ is an odd function.
+\end{enumerate}
+\end{proof}
+
+\begin{exer}\label{exer:smooth-urysohn} Let $K\subseteq\dbR$ be a compact set and $U\supseteq K$ an open set. Show that there exists $f\in C_c^\infty (U):=\set{g\in C_c^\infty(\dbR):\supp (g)\subseteq U}$ such that $f\mid_{K}\equiv 1$. 
+\end{exer}
+\begin{rem}This exercise holds in much greater generality.%; in particular, it may be on any smooth manifold.
+\end{rem}
+\begin{proof}[\it Solution]
+Set $\epsilon=d(K,U^c)=\inf\set{d(x,y):x\in K,\:y\in U^c}$, and, for any $\delta>0$, put $K_\delta=\set{x\in U:d(x,K)\le \delta}$, a closed set in $U$. By Urysohn's Lemma, there exists $\varphi:U\to [0,1]$ such that $\varphi\mid_{K_{\epsilon/4}}\equiv 1$ and $\varphi\mid_{\cl{K_{3\epsilon/4}^c}}\equiv 0$. Let $\psi\in C_c^\infty(\dbR)$ have $\supp(\psi)=[-\epsilon/4,\epsilon/4]$, $\psi(0)\ne 0$ and $\int_{\dbR}\psi(x)dx=1$ (normalise the function taken in \autoref{exer:Ccinfty-non-empty}). By \autoref{exer:conv-properties}, $f=\varphi\ast\psi$ is smooth and has support $\supp(f)=\supp(\psi)+\supp(\varphi)\subseteq K_{3\epsilon/4}+[-\epsilon/4,\epsilon/4]\subseteq U$. Furthermore, for any $x\in K$,
+\[f(x)=\int_{\dbR}\varphi(x-t)\psi(t)dt=\int_{-\epsilon/4}^{\epsilon/4}\underbrace{\varphi(x-t)}_{x-t\in K_{\epsilon/4}}\psi(t)dt=\int_{-\epsilon/4}^{\epsilon/4}\psi(t)dt=1.\]
+\end{proof}
+
+\begin{rem}Note that the function $f$ we obtained in \autoref{exer:smooth-urysohn} is, in addition, non-negative.
+\end{rem}
+\begin{exer}[Partition of unity] Let $f\in C_c^\infty(\dbR)$, $I$ an indexing set and $\dbR=\bigcup_{i\in I}U_i$ an open cover. Then there exist $f_i\in C_c^\infty(U_i)$, for any $i\in I$, such that $f=\sum_{i\in I}f_i$. 
+\end{exer}
+\begin{proof}[\it Solution] Put $K=\supp (f)$. Since $K$ is compact, there exist $i_1,\ldots,i_r\in I$ such that $K\subseteq \bigcup_{j=1}^r U_{i_j}$. 
+\begin{claim}There exists open sets $V_1,\ldots,V_r\subseteq \dbR$ such that $K\subseteq \bigcup_{j=1}^r V_j$ and such that $\cl{V_j}\subseteq U_{i_j}$, for any $j=1,\ldots,r$. 
+\end{claim}
+\begin{proof}[\it Proof of Claim]\renewcommand{\qedsymbol}{}Put $\mcal{A}=\set{V\subseteq \dbR\text{ open}:\cl{V}\subseteq U_{i_j}\text{ for some }j=1,\ldots,r}$. Note that, as $K$ is a regular topological space ($T_3$, i.e. separates points from closed sets), for any $x\in K$, there exists $V\in\mcal{A}$ such that $x\in V$. In particular $\mcal{A}$ is a cover of $K$, and there exists a finite subcover $\mcal{B}\subseteq\mcal{A}$. We can choose a function $f:\mcal{B}\to \set{1,\ldots,r}$, mapping each $V\in \mcal{B}$ to $j\in \set{1,\ldots,r}$ such that $\cl{V}\subseteq U_{i_j}$. Define, for any $j=1,\ldots,u_j$,
+\[V_j:=\bigcup f^{-1}(U_{i_j}).\]
+As $V_j$ is the union of finitely many open sets whose closures are contained in $U_{i_j}$, so does $\cl{V_j}\subseteq U_{i_j}$. 
+\end{proof}
+Using the claim and \autoref{exer:smooth-urysohn}, for any $j=1,\ldots,r$ we may choose $\rho_j$ such that $\rho_j\mid_{K\cap \cl{V_j}}\equiv 1$ and $\rho_j\mid_{U_{i_j}^c}\equiv 0$. In particular, since the $\rho_j$'s can be taken to be non-negative, we have that $\sum_{j=1}^r \rho_j(x)\ne 0$ for any $x\in K$, and we may define 
+\[f_i=\begin{cases}\frac{\rho_j\cdot f}{\rho_1+\cdots+\rho_r}&\text{if }i=i_j\in\set{i_1,\ldots,i_j}\\
+0&\text{otherwise}
+\end{cases}
+\]
+\end{proof}
+
+\begin{exer}Show that $C_c^\infty(\dbR)$ is dense in $C_c(\dbR)$ with respect to uniform convergence.
+\end{exer}
+\begin{rem}More generally, it is true that $C_c^\infty(\dbR)$ is dense in $L^p(\dbR)$, for any $1\le p<\infty$ (but not for $p=\infty$). This will be proved in the home exercise.
+\end{rem}
+\begin{proof}
+Let $g\in C_c(\dbR)$. We construct a sequence $\set{g_n}_{n\in \dbN}$ of elements of $C_c^\infty(\dbR)$ such that $g_n\xrightarrow{n\to\infty}g$.
+
+For any $n\in\dbN$, let $\chi_n\in C_c^\infty(\dbR)$ be a non-negative bump function with $\supp(\chi_n)=\left[-\frac{1}{n},\frac{1}{n}\right]$ and $\norm{\chi_n}_1:=\int_\dbR\chi_n=1$ (e.g., take $\chi_n=\frac{f_{-\frac{1}{n},\frac{1}{n}}}{\norm{f_{-\frac{1}{n},\frac{1}{n}}}_1}$, where $f_{a,b}$ is as in \autoref{exer:Ccinfty-non-empty}), and put \[g_n=g\ast \chi_n\quad\text{for all}\quad n\in\dbN.\]
+By \autoref{exer:conv-properties}, since $g$ and $\chi_n$ have compact support and $\chi_n$ are smooth, we have that $g_n\in C_c^\infty(\dbR)$ for all $n$. Moreover, again by \autoref{exer:conv-properties}.(3), \[\supp(g_n)=\supp(g)+\left[-\frac{1}{n},\frac{1}{n}\right]\subseteq\supp(g)+\left[-1,1\right],\]
+and so, as this is a compact set, it suffices to show point-wise convergence in this domain. This holds since, for any $x\in\dbR$, 
+\[g_n(x)=\int_\dbR g(x-t)\chi_n(t)dt=\int_{-\frac{1}{n}}^{\frac{1}{n}}g(x-t)\chi_n(t)dt,\]
+and
+\begin{multline*}
+\min_{\abs{t'}\le \frac{1}{n}}g(x-t')=\min_{\abs{t'}\le \frac{1}{n}}g(x-t')\cdot \int_{-\frac{1}{n}}^{\frac{1}{n}}\chi_n(t)dt\\
+\le \int_{-\frac{1}{n}}^{\frac{1}{n}} g(x-t)\chi_n(t)dt\\
+\max_{\abs{t'}\le \frac{1}{n}}g(x-t')\cdot \int_{-\frac{1}{n}}^{\frac{1}{n}}\chi_n(t)dt\le \max_{\abs{t'}\le \frac{1}{n}}g(x-t').
+\end{multline*}
+Since $g$ is continuous on $\dbR$, both right-hand left-hand side of this inequality converge to $g(x)$ as $n\to \infty$, implying the claim.
+\end{proof}
+\end{document}
+\begin{exer}The sequence $f_n=\frac{1}{2^n}\chi_{[0,2^{pn}]}$ converges uniformly to $0$, but not in the $\norm{\cdot}_p$-norm, for $p\ge 1$.
+\end{exer}
+\begin{proof}
+\[
+\norm{f_n}_p^p={\int_{0}^{2^{pn}}\left(\frac{1}{2^n}\right)^pdx}=2^{pn}\frac{1}{2^{pn}}=1.\]
+In fact, for $n<m$,
+\[\norm{f_n-f_m}^p_p=\int_{2^{pn}}^{2^{pm}}\left(\frac{1}{2^{n}}-\frac{1}{2^{m}}\right)^pdx=2^{pn}(2^{pm-pn}-1)\cdot\frac{1}{2^{pn}}\left(1-\frac{1}{2^{m-n}}\right)^p\]
+which may not converge to zero, e.g. if $m=2n$
+\[\norm{f_{n}-f_{2n}}_p^p=(2^{pn}-1)(1-\frac{1}{2^n})^p\xrightarrow{n\to\infty}+\infty.\]
+\end{proof}
+

@@ -1,0 +1,391 @@
+\documentclass[12pt, draft,reqno,a4paper, twoside]{amsproc}
+\usepackage{ifpdf}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm, amssymb,bm}
+\usepackage{geometry}
+\usepackage{fullpage}
+\usepackage{ucs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  filecolor=red}
+  
+  
+\include{aliascnt}
+
+
+%%% Famous group schemes
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\matr}{M}
+
+
+%% Common Operators
+
+\DeclareMathOperator{\Gal}{\bf Gal}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{Aut}
+\newcommand{\Span}{\operatorname{Span}}
+\DeclareMathOperator{\spec}{Spec}
+
+\renewcommand{\ker}{\mathrm{Ker}}
+\newcommand{\coker}{\mathrm{Coker}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\rad}{\mathrm{Rad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\Ql}{\underline{\dbQ_\ell}}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Cen}{\ensuremath{\mathrm{C}}}
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\cl}[1]{\mathrm{cl}\left(#1\right)}
+%\newcommand{\cl}[1]{\overline{#1}}
+
+\renewcommand{\L}{\mcal{L}}
+%% Famous Fields, Rings, Sets etc.
+
+\renewcommand{\O}{\varnothing}
+\newcommand{\dbN}{\mathbb N}
+\newcommand{\dbZ}{\mathbb Z}
+\newcommand{\dbF}{\mathbb F}
+\newcommand{\dbQ}{\mathbb Q}
+\newcommand{\dbR}{\mathbb R}
+\newcommand{\dbC}{\mathbb C}
+\newcommand{\dbA}{\mathbb A}
+\newcommand{\dbP}{\mathbb P}
+
+\newcommand{\kk}{k}
+\newcommand{\B}{\mcal{B}}
+
+\newcommand{\frob}{\sigma}
+
+%% Common Unary Functions
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inner}[1]{\left(#1\right)}
+
+
+%% Shorter font named
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mfr}{\mathfrak}
+\newcommand{\msf}{\mathsf}
+
+\newcommand{\widebar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+\newcommand{\loc}{\mathrm{loc}}
+
+%% 
+
+\newenvironment{sol}{\sc Solution. \rm}{\hfill \qedsymbol\bigskip}
+
+\title{Generalized functions\\Tutorial notes}
+\begin{document}\maketitle
+\part*{Tutorial 2}\setcounter{section}{2}
+\subsection{Topologies on $C_c^\infty(\dbR)$ and $(C_c^\infty(\dbR))^*$}
+\begin{defi}[Convergence in $C_c^\infty(\dbR)$] A sequence $(f_n)_{n=1}^\infty$ of elements of $C_c^\infty(\dbR)$ is said to converge to $f\in C_c^\infty(\dbR)$ if:
+\begin{enumerate}
+\item There exists a compact set $K\subseteq \dbR$ such that $\bigcup_{n=1}^\infty \supp(f_n)\subseteq K$; and
+\item For every $k\in\dbN$ the derivatives $(f_n^{(k)})_n$ converge uniformly to the derivative $f^{(k)}$.
+\end{enumerate}
+\end{defi}
+
+\begin{defi}[Distributions] A linear functional $\xi:C_c^\infty(\dbR)\to \dbR$ is \emph{continuous} if for every convergent sequence $(f_n)_n$ in $C_c^{\infty}(\dbR)$, we have 
+\[\lim_{n\to\infty}\gen{\xi,f_n}=\gen{\xi,\lim_{n\to\infty}f_n}.\]
+A continuous linear functional is also called a \emph{distribution} of a \emph{generalized function}.
+\end{defi}
+
+\begin{rem} One can indeed classify continuous functionals by their behaviour with respect to Cauchy sequences, according to the following exercise (to be proved in the future).
+\end{rem}
+
+\begin{exer}A linear operator between semi-normed spaces is continuous if and only if it maps Cauchy sequences to Cauchy sequences.
+\end{exer}
+
+\begin{rem}As mentioned in the lecture, at the moment we make no distinction between the space generalized functions, which we denote $C^{-\infty}(\dbR)$ and of distributions, as these spaces coincide over $\dbR$. We will discuss the difference between the two in later parts of the course, where they will be relevant.
+\end{rem}
+
+Let $L_\loc^1(\dbR)$ denote the space of locally $L^1$-functions on $\dbR$, i.e. $f:\dbR\to \dbR$ such that $f\cdot \id_K\in L^1(\dbR)$ for every compact set $K$, and recall that we have natural inclusions $C(\dbR)\subseteq L_\loc^1(\dbR)\subseteq C^{-\infty}(\dbR)$, where the final inclusion is via the map $f\mapsto\xi_f$, where $\xi_f(g)=\int_{\dbR}f(x)g(x)dx$. 
+\begin{exer}Show that $\xi_f$ is a well-defined distribution for all $f\in L^1_\loc(\dbR)$. 
+\end{exer}
+\begin{sol}
+	The only non-obvious statement is continuity of $\xi_f$. Let $(g_n)_n$ be a convergent sequence in $C_c^\infty(\dbR)$, with limit $g$ and let $K\supseteq\supp(g)\cup \bigcup_n \supp (g_n)$ be compact, as in the definition. By uniform converges, there exists $n_0\in \dbN$ such that $\abs{g-g_n}_\infty<1$ for all $n>n_0$. In particular, $\abs{g_n}<\abs{g}+I_K$ for all $n>n_0$, and $\int_{\dbR}(g+I_K)(x)dx=\int_\dbR g(x)dx+\mathrm{vol}(K)<\infty$. 
+
+	Similarly, we have that $fg_n\le fg+fI_K$, where the RHS is absolutely integrable,  for all but finitely many $n$'s, and, by Dominated Convergence, we have that 
+	\[\lim_{n\to\infty}\xi_f(g_n)=\lim_{n\to\infty}\int_\dbR f(x)g_n(x)dx=\int_{\dbR}f(x)g(x)dx=\xi_f(g).\]
+\end{sol}
+
+\begin{defi}[Weak convergence in $L^1_\loc$] A sequence function $(f_n)_n$ in $L^1_\loc$ is said to converge weakly to $f$ if for every $g\in C_c^\infty(\dbR)$, $\lim_{n\to\infty}\int_{\dbR}f_n(x)g(x)dx=\int_{\dbR}f(x)g(x)$. In other words, $\xi_{f_n}(g)$ tends to $\xi_f(g)$, for any $g\in C_c^\infty(\dbR)$, as $n\to\infty$. 
+\end{defi}
+
+\begin{exer}Find a sequence of functions $(f_n)_n\in C_c^\infty(\dbR)$ which converges weakly to $\delta_0$, the Dirac delta function at zero.
+\end{exer}
+\begin{sol}Let $\psi\in C_c^\infty(\dbR)$ be a non-negative, non-zero function with $\supp(\psi)=[-1,1]$ and $\norm{\psi}_1=1$, and define $f_n(x)=n\psi(nx)$, for any $n\in\dbN$. Then 
+\[\int_\dbR f_n(x)g(x)dx=\int_{-1/n}^{1/n} n\psi(nx)g(x)dx=\int_{-1}^{1}\psi(x)g(x/n)dx,\]
+and the RHS is bounded above an below by $\sup_{\abs{x}\le 1/n}g(x)$ and $\inf_{\abs{x}\le 1/n}g(x)$, respectively. Since $g$ is continuous, they both tend to $g(0)$ as $n\to\infty$.
+\end{sol}
+
+\begin{exer}Find a sequence of functions $(f_n)_n$ converging weakly to $f$, which does not converge pointwise to $f$. 
+\end{exer} 
+\begin{sol}
+Let $\psi$ be a bump function, supported on $[-1,1]$ and with $\psi(0)=1$,  put $f_n(x)=\psi(nx)$, for any $n\in \dbN$. In this setting $f_n$ is easily verified to converge weakly to the zero function, as
+\[\int_{\dbR}f_n(x)g(x)=\int_{-1/n}^{1/n}\psi(nx)g)(x)dx=\frac{1}{n}\int_{-1}^{1}\psi(x)g(x/n)dx,\]
+which tends to $0$ as $n$ tends to infinity. However $f_n(0)=1$ for all $n$, so $f_n\not\to 0$ pointwise.
+\end{sol}
+
+\begin{defi}A sequence $(\xi_n)_n$ of generalized functions converges weakly to $\xi\in C^{-\infty}(\dbR)$ if $\lim_{n\to\infty}\gen{\xi_n,f}=\gen{\xi,f}$ for any $f\in C_c^\infty(\dbR)$. 
+\end{defi}
+Note that, by definition, the topology of weak convergence is generated by the seminorms  of the form $\xi\mapsto \abs{\xi(f)}:(C_c(\dbR))^*\to\dbR$ , where $f$ ranges over all elements of$(C_c^\infty(\dbR))$. In particular, it has a neighbourhood base of sets of the form
+\begin{equation}\label{equation:base-of-weak}
+U_{\boldsymbol{f},\boldsymbol{\epsilon}}(\xi)=\set{\nu:\abs{\nu(f_i)-\xi(f_i)}<\epsilon_i\text{ for all }i=1,\ldots,r},
+\end{equation}
+where $\xi\in C^{-\infty}(\dbR)$, $r\in\dbN,\:\boldsymbol{f}=(f_1,\ldots,f_r)$ is an $r$-tuple of elements of $C_c^\infty(\dbR)$, and $\boldsymbol{\epsilon}=(\epsilon_1,\ldots,\epsilon_r)\in(\dbR_{>0})^r$. 
+\begin{exer}The map $f\mapsto \xi_f:C_c^\infty(\dbR)\to C^{-\infty}(\dbR)$ is injective with dense image with respect to the weak topology.
+\end{exer} 
+\begin{sol}
+	Injectivity of $f\mapsto \xi_f$ is equivalent to the statement that $\xi_f\equiv 0$ if and only if $f\equiv 0$, which is easily verified by applying $\xi_f$ to test functions with small support around points where $f$ is non-vanishing. 
+	
+	To prove that the image is dense, we require the following lemma, which we'll prove in greater generality later on in the course.
+\begin{lem}
+	Put $V=C_c^\infty(\dbR)$ and let $W\subseteq V^*$ be a subspace. Then $W$ is dense in $V^*$ with respect to weak topology if and only if $W^\perp=\set{v\in V:\gen{w,v}=0\text{ for all }w\in W}=\set{0}$. 
+\end{lem}
+
+Here $\gen{\xi,f}:=\xi(f)$ is the previously defined pairing  $C_c^\infty(\dbR)\times(C_c^\infty(\dbR))^*\to \dbR$. We will prove the \textit{only if} implication below, as it is the only relevant one. Using the Lemma, we only need to verify that the perpendicular space to $W=\set{\xi_f:f\in C_c^\infty(\dbR)}$ is zero. This holds, since $g\in W^\perp$ implies that $\int_{\dbR}f(x)g(x)dx=0$ for all $f\in C_c^\infty(\dbR)$, and, in particular, for test functions with arbitrarily small supports around any point $x\in \dbR$. 
+
+\begin{proof}[Proof of lemma]
+	By our description of the weak convergence topology, it suffices to show that any set of the form $U_{\boldsymbol{f},\boldsymbol{\epsilon}}(\xi)$ contains an element of the form $\xi_g$ for some $g\in C_c^\infty(\dbR)$. We will show something stronger; namely, given $\xi\in C^{-\infty}(\dbR)$ and $S=\set{f_1,\ldots,f_r}\subseteq C_c^\infty(\dbR)$ a finite set, there exists $g\in C_c^\infty(\dbR)$ such that $\xi\mid_S=\xi_g\mid_S$. Wlog, we may assume $S$ is linearly independent, and define $\rho=\rho_S:(C_c^\infty(\dbR))^*\to\dbR^r$ by $\rho(\eta)=(\gen{\eta,f_1},\ldots,\gen{\eta,f_r}$. Then $\rho\mid_W$ is surjective, otherwise it is contained in a hyperplane (i.e. a one codimensional space) of the form $\set{\sum_{i=1}^r c_i x_i=0}$ for some fixed $c_1,\ldots,c_r$, not all zero. But then $(c_1,\ldots,c_r)\cdot \rho(w)=\sum_{i=1}^r c_i\gen{w,f_i}=\gen{w,\sum_{i=1}^r c_if_i}=0$, for all $i=1,\ldots,r$, which implies $0\ne \sum c_if_i\in W^\perp$, a contradiction. In particular, as $\rho\mid_W$ is surjective, we there exists $g\in C_c^\infty(\dbR)$ with $\xi_g\in W$ such that $\rho(\xi_g)=\rho(\xi)$, as required.\renewcommand{\qedsymbol}{}
+\end{proof}
+%Let $f\mapsto\xi_f:C_c^\infty(\dbR)\to (C_c^\infty(\dbR))^*$ be defined by $\xi_f(g)=\int_\dbR f(x)g(x)dx$. Given a weakly Cauchy sequence $(f_n)_n$ in $C_c^\infty(\dbR)$, we get a well defined functional $\gen{\xi,g}=\lim_{n\to\infty}\gen{\xi_{f_n},g}=\lim_{n\to\infty}\int_\dbR f_n(x)g(x)$ on $C_c^\infty(\dbR)$, as the number sequence $(\gen{\xi_{f_n},g})_n$ is Cauchy and hence converges. To verify that $\xi$ is continuous. Indeed, given sequence $(g_n)_n$ converging to $g$ in $C_c^\infty(\dbR)$, we have that 
+%\[\lim_{n\to\infty}\gen{\xi,g_n}=\lim_{n\to\infty}\lim_{m\to\infty}\gen{\xi_{f_m},g_n}=\lim_{m\to\infty}\lim_{n\to\infty}\gen{\xi_{f_m},g_n}=\lim_{m\to\infty}\gen{\xi_{f_m},g}=\gen{\xi,g}.\]
+%Here the second equality is justified since (\textit{is it?}) and the third follows from the uniform convergence of $(g_n)$.
+%
+%[Finish this].
+\end{sol}
+
+\subsection{Distributional derivatives}
+
+\begin{defi} The derivative of a distribution $\xi$ is defined via the rule $\gen{\xi',f}=-\gen{\xi,f'}$.
+\end{defi}
+In the case where $\xi=\xi_f$ for $f\in C^\infty(\dbR)$, we have
+\[\gen{\xi_f',g}=\int_{\dbR}f'(x)g(x)dx=\left[f(x)g(x)\right]_{x=-\infty}^\infty-\int_{\dbR}f(x)g'(x)dx=-\gen{\xi_{f'},g}.\]
+Note that we do not require $f$ to have compact support.
+
+\begin{exer}Find a function $f\in L_\loc^1(\dbR)$ whose distributional derivative is $\delta_0$.
+\end{exer}
+
+\begin{sol}
+Note that, for any $g\in C_c^\infty(\dbR)$, we have that 
+\[\gen{\delta_0,g}=g(0)=g(0)-\lim_{x\to\infty}g(x)=-\int_{0}^\infty g'(x)dx,\]
+by the fundamental theorem of calculus. Writing $H=\id_{\set{x\ge 0}}$ for the indicator function of the non-negative half axis (that is- the Heaviside function), we deduce that \[\gen{\delta_0,g}=-\gen{\xi_H,g'}=\gen{\xi_H',g},\]
+as wanted.
+\end{sol}
+
+\begin{exer}Compute the derivatives of $\abs{\sin(x)},\abs{x}{\sin(x)}$ and $\tanh(1/x)$, considered as distributions.
+\end{exer}
+\begin{sol}Let $g\in C_c^\infty(\dbR)$ be arbitrary.
+%
+% \underline{$\abs{\sin(x)}$}.
+\begin{multline*}
+\gen{\xi_{\abs{\sin}}',g}=-\int_{\dbR}\abs{\sin(x)}g'(x)dx\\
+=\sum_{n\in\dbZ}\left(-\int_{2n\pi}^{(2n+1)\pi}\sin(x)g'(x)dx+\int_{(2n+1)\pi}^{(2n+2)\pi}\sin(x)g'(x)dx\right)\\
+%\sum_{n\in\dbZ}\left(\left[\sin(x)g(x)\right]_{2n\pi}^{(2n+1)\pi}+\int_{2n\pi}^{(2n+1)\pi}\cos(x)g(x)dx-\left[\sin(x)g(x)\right]_{(2n+1)\pi}^{(2n+n)\pi}-\int_{(2n+1)\pi}^{(2n+2)\pi}\cos(x)g(x)dx\right)\\
+=\int_{\dbR}\cos(x)\mathrm{sgn}(\sin(x))g(x)dx=\gen{\xi_{\cos(x)\mathrm{sgn}(\sin(x))},g}
+\end{multline*}\nopagebreak
+where $\mathrm{sgn}(y)=\frac{y}{\abs{y}}$ is the sign function. Thus $(\abs{\sin})'=\cos(x)\mathrm{sgn}(\sin(x))$.
+%
+%\underline{$\abs{x}\sin(x)$}.
+\begin{multline*}
+\gen{\xi'_{\abs{x}\sin(x)},g}=-\int_{\dbR}\abs{x}\sin(x)g'(x)dx=\int_{-\infty}^0 x\sin(x)g'(x)dx-\int_{0}^\infty x\sin(x)g'(x)dx\\=-\int_{-\infty}^0 (\sin(x)+x\cos(x))g(x)dx+\int_0^\infty (\sin(x)+x\cos(x))g(x)dx\\
+=\int_\dbR(\sin\abs{x}+\abs{x}\cos(x))g(x)dx
+\end{multline*}
+Thus $(\abs{x}\sin(x))'=\sin\abs{x}+\abs{x}\cos(x)$. Note that the function in this case is $C^1$ on $\dbR$, so the computation above is in fact unnecessary.
+%
+% \underline{$\tanh(1/x)$}
+\begin{multline*}\gen{\xi'_{\tanh(1/x)},g}=-\int_{\dbR}\tanh(1/x)g'(x)dx\\
+=-\left(\int_0^\infty\tanh(1/x)g'(x)dx+\int_{-\infty}^0\tanh(1/x)g'(x)dx\right)\\
+=-\left(-\lim_{x\to 0^+}\tanh(1/x)g(x)+\lim_{x\to 0^-}\tan(1/x)g(x)+\int_\dbR\frac{1}{x^2\cosh(1/x)}g(x)dx\right)\\=\gen{2\delta_0-\xi_{(x^2\cosh(1/x)^2)^{-1}},g}
+\end{multline*}
+and $(\tanh(1/x))'=2\delta_0+\frac{1}{x^2\cosh(1/x)^2}$. 
+\end{sol}
+
+\begin{exer}\label{exer:zero-derivative} Let $\xi\in C^{-\infty}(\dbR)$ . Show that $\xi'=0$ if and only if is of the form $\gen{\xi,g}=\int_\dbR ag(x)dx$ for $a\in \dbR$. 
+\end{exer}
+\begin{sol}
+\begin{itemize}
+\item[$\Leftarrow$] Clear.
+\[\gen{\xi',g}=-\int_\dbR ag'(x)dx=\left[ag(x)\right]_{x=-\infty}^\infty=0.\]
+\item[$\Rightarrow$]
+Let $f\in C_c^\infty(\dbR)$ and let $\psi\in C_c^\infty(\dbR)$ be a test function with $\int_\dbR\psi(x)dx=1$. Put $g=f-\psi\cdot\int_{\dbR}f(x)dx$. Then $g\in C_c^\infty(\dbR)$ and $\int_{\dbR}g(x)dx=0$, and hence $G(x)=\int_{-\infty}^x g(t)dt$ is an anti-derivative of $g(x)$ in $C_c^\infty(\dbR)$. Now, we have that
+\[\gen{\xi,f}=\gen{\xi,g}+\int_{\dbR}f(x)dx\cdot \gen{\xi,\psi}=\xi(G')+\gen{\xi_{\gen{\xi,\psi}},f}=\gen{\xi_{\gen{\xi,\psi}},f}.\]
+
+% First note that the assertion is true for regular distributions of the form $\xi=\xi_f$ for $C_c^\infty(\dbR)$. Indeed, assume $\xi_f'=0$ and $f$ is non-constant, and let $x_0$ be such that $f'(x_0)\ne 0$. Wlog, $f'(x_0)>0$ and there exists an open interval $U$ such that $f'\mid_U>0$. Let $g$ be a non-zero non-negative test function with $\supp(g)\subseteq U$. Then 
+%\[\gen{\xi',g}=-\int_{\dbR}f(x)g'(x)dx=\int_{U}f'(x)g(x)dx>0.\]
+%
+%Now let $\xi\in C^{-\infty}(\dbR)$ be arbitrary, and let $(f_n)_n$ be a sequence weakly converging to $\xi$ (under the natural identification). ????
+\end{itemize}
+\end{sol}
+
+\begin{rem}
+Note that the proof of \autoref{exer:zero-derivative} extends verbatim to the case where $\xi'\mid_U\equiv0$ for an open interval $U\subseteq \dbR$, implying that in this situation $\xi(g)=\int_\dbR ag(x)dx$ for all $g\in C_c^\infty( U)$. 
+\end{rem}
+
+\subsection{Support of a generalized function}
+\begin{defi}[Support of a generalized function] Given $\xi\in C^{-\infty}$ and $U\subseteq \dbR$ open, we say that $\xi\mid_U\equiv 0$ for all $f\in C_c^\infty(U)$. The \emph{support} of $\xi$ is defined to be $\supp(\xi)=\bigcap_{\xi\mid_{D_\beta^c\equiv 0}}D_\beta$, where the $D_\beta$ are taken to be closed. 
+\end{defi}
+Equivalently, $\supp (\xi)$ is the complement of the largest open set on which $\xi$ vanishes, and is, in particular, closed.
+
+\begin{exer}Prove the identity axiom of $C^{-\infty}(\dbR)$, i.e. for every $\xi\in C^{-\infty}(\dbR)$, if there exists an open cover $\set{U_i}_{i\in I}$ of $\dbR$ such that $\xi\mid_{U_i}\equiv 0$ for all $i$, then $\xi=0$.
+\end{exer}
+\begin{sol}Let $f\in C_c^\infty(\dbR)$. By an exercise from the previous tutorial (smooth partition of unity), we may choose $i_1,\ldots,i_r\in I$ such that $\supp(f)$ is covered by $\bigcup_{j=1}^rU_{i_j}$ and find functions $f_1,\ldots,f_r\in C_c^\infty(\dbR)$ with $\supp(f_{j})\subseteq U_{i_j}$ such that $f=\sum_{j=1}^r f_j$. Since this is a finite sum, we have 
+\[\gen{\xi,f}=\sum_{j=1}^r\gen{\xi,f_j}=0\]
+\end{sol}
+
+\begin{exer}
+Show that \[\supp(\xi)\setminus\supp(\xi)^\circ\subseteq\supp(\xi')\subseteq\supp(\xi),\]
+for any $\xi\in C^{-\infty}(\dbR)$. 
+\end{exer}
+\begin{sol}The second inclusion is obvious: given $U\subseteq \supp(\xi)^c$, and $f\in C_c^\infty(U)$, we have that $f'\in C_c^\infty(U)$ as well, and $\xi'(f)=-\xi(f')=0$, implying that $\xi'\mid_U\equiv 0$. 
+
+For the first inclusion, let $U\subseteq \supp(\xi')^c$ be an open \textit{interval}. By \autoref{exer:zero-derivative}, as $\xi'\mid_U\equiv 0$, there exists $a\in \dbR$ such that $\xi'\mid_U\equiv\int_\dbR ag(x)dx$, for all $g\in C_c^\infty(U)$. If $a=0$ then $U\subseteq \supp(\xi)^c$. Otherwise, if $a\ne 0$, by evaluating $\xi$ on a positive test function, we have that $U\subseteq \supp(\xi)^\circ$ (since $U$ is open). Thus 
+$\supp(\xi')^c\subseteq \supp(\xi)^c\cup\supp(\xi)^\circ$, as required.
+\end{sol}
+
+
+\begin{propo}\label{propo:support-zero}The space of generalized functions with support $\set{0}$ is spanned by the set of derivatives of $\delta_0$. 
+\end{propo}
+The proposition follows from the following two lemmas, the first of which is proved in the home-exercises.
+
+\begin{lem}Let $\xi$ be a generalized function with support $\set{0}$. Then there exists $k\in\dbN$ such that $\xi x^k=0$. 
+ \end{lem}
+\begin{proof}	
+	Home exercise.
+\end{proof}
+%\begin{proof}
+%Firstly, we note that, by definition, the topology of $C_c^\infty(\dbR)$ is generated by the family of seminorms $\norm{f}_{C^k(D)}=\sup_{x\in D}\sum_{i=0}^k\abs{f^{(i)}(x)}$, where $D$ ranges over the compact subset of $\dbR$ and $k\in\dbN$. It follows, in particular, from the continuity of $\xi:C_c^\infty(\dbR)\to\dbR$, that for any compact $D\subseteq \dbR$ there exists $k_D\in \dbN$ and $c_D>0$ such that 
+%\[\abs{\gen{\xi,f}}\le c_D\norm{f}_{C^k(D)},\]
+%for any $f\in C_c^\infty(D)$. 
+%
+%Secondly, we note that the assumption $\supp(\xi)=\set{0}$ implies that, given $\psi\in C_c^\infty(\dbR)$ which equals $1$ in some neighbourhood of $0$, we have that $\xi(f\psi)=\xi(f)$ for all $f\in C_c^\infty(\dbR)$; indeed, $f-f\psi$ vanishes in a neighbourhood of $0$. 
+%
+%Fix $\psi\in C_c^\infty(\dbR)$ with $\supp(\psi)\subseteq (-1,1)$ and such that $\psi\equiv 1$ in a neighbourhood of $0$, and define $\psi_\epsilon(x)=\psi(\epsilon^{-1}x)$, for any $\epsilon>0$. Noting that $\supp(\psi_\epsilon f)\subseteq (-\epsilon,\epsilon)\subseteq[-1,1]$ for all $\epsilon>0$, and taking $k=k_{[-1,1]}$ and $c=c_{[-1,1]}$, we have that, for any $d\in\dbN$,
+%\[\abs{\gen{\xi x^d,f}}=\abs{\gen{\xi,x^d f}}=\abs{\gen{\xi,x^d f\psi_\epsilon}}\le c\sup_{x\in (-\epsilon,\epsilon)}\sum_{i=0}^k\abs{(x^df\psi_\epsilon)^{(i)}(x)}.\]
+%Put $M=\max\set{\abs{f^{(i)}\psi^{(j)}(\epsilon^{-1} x)}:i,j\le k,x\in [1,-1],\:\epsilon\in [0,1]}$. Note that this maximum is attained, since both $f$ and $\psi$ are smooth and compactly supported. We have that, for any $i$ and $x\in[-\epsilon,\epsilon]$,
+%\begin{multline*}
+%\abs{(x^d f\psi_\epsilon)^{(i)}(x)}=\abs{\sum_{i_1+i_2+i_3=i}{i\choose i_1,i_2,i_3}(x^d)^{i_1}f^{(i_2)}\psi^{(i_3)}(\epsilon^{-1}x)\epsilon^{-i_3}}\\
+%\le \sum_{i_1+i_2+i_3=i}{i\choose i_1,i_2,i_3}\frac{d!}{i_1!}\abs{x^{d-i_1}}M\epsilon^{-i_3}\\
+%\le \sum_{i_1+i_2+i_3=i}{i\choose i_1,i_2,i_3}\frac{d!}{i_1!}M\epsilon^{-i_3-i_1+d}.
+%\end{multline*}
+%Taking $d>k$, we have that 
+%\[\gen{\xi x^d,f}\le c\sum_{i=0}^k\sum_{i_1+i_2+i_3=i}(\text{bounded terms})\cdot \epsilon^{d-i_1-i_3},\]
+%and the exponent of $\epsilon$ is always positive. It follows that $\gen{\xi x^d,f}=0$, whence the lemma, since $\epsilon$ can be taken to be arbitrarily small.
+%\end{proof}
+
+
+\begin{lem}Assume $\xi x^k=0$ for some $k\in\dbN$. Then $\xi=\sum_{i=0}^{k-1}c_i\delta_0^{(i)}$ for some $c_i\in \dbR$. 
+\end{lem}
+\begin{proof}
+We argue by induction on $k$. The case $k=0$ is trivial, but it is instructive to consider the case $k=1$ before proceeding.
+
+Note that, for any $f\in C_c^\infty(\dbR)$, we have the following:
+\begin{equation}
+\label{equation:Cauchy-interpolation}
+f(x)-f(0)=\int_0^x f'(t)dt=x\cdot\int_0^1 f'(xt)dt.
+\end{equation}
+If the function $x\mapsto\int_0^1 f(xt)dt$ were of compact support the lemma would easily follow. However, this is rarely the case. Let $\psi\in C_c^\infty(\dbR)$ have $\psi(0)=1$. Applying \eqref{equation:Cauchy-interpolation} twice, we have:
+\begin{multline*}
+f(x)=f(0)\psi(0)+\int_0^1 f'(xt)dt=f(0)\psi(x)-x\underbrace{\left(f(0)\int_{0}^1 \psi'(xt)dt-\int_0^1f'(xt)\right)}_{\star}.
+\end{multline*}
+Note that the expression ($\star$) is smooth and compactly supported, as it may be rewritten as
+\[(\star)=f(0)\cdot\frac{\psi(x)-\psi(0)}{x}-\frac{f(x)-f(0)}{x}=\frac{1}{x}\left(f(0)\psi(x)-f(x)\right).\]
+Thus, we have that
+\[\gen{\xi,f}=f(0)\gen{\xi,\psi}+\underbrace{\gen{\xi,x\cdot(\star)}}_{=0\text{ by assumption}}.\]
+Finally, note that $\gen{\xi,\psi_1}=\gen{\xi,\psi_2}$ for any two test functions with $\psi_1(0)=\psi_2(0)=1$. Indeed, using \eqref{equation:Cauchy-interpolation},
+\[\gen{\xi,\psi_1-\psi_2}=\gen{\xi,x\int_0^1(\psi_1'(xt)-\psi_2(xt)dt}=0,\]
+using the same argument that $\int_0^1(\psi_1'(xt)-\psi_2'(xt))dt\in C_c^\infty(\dbR)$. Thus we may take $c_0=\gen{\xi,\psi}$
+
+Now for the induction step. By assumption $\xi x^{k+1}=(\xi x)x^{k}=0$, and, using the induction hypothesis, $\xi x=\sum_{i=0}^{k-1} c_i\delta^{(i)}$. Using the same formula as above, for $f\in C_c^\infty(\dbR)$, we have that
+\[\gen{\xi, f}=f(0)\gen{\xi,\psi}+\gen{\xi x,(\star)}=f(0)\gen{\xi,\psi}+\sum_{i=0}^k c_i\gen{\delta^{(i)},(\star)}\]
+Using our above expansion of ($\star$), and the explicit description of $\delta^{(i)}$ as $\gen{\delta^{(i)},g}=(-1)^i g^{(i)}(0)$, by taking $\psi$ have at least $k$ zero derivatives at $0$, we easily verify that 
+\[\gen{\delta^{(i)},(\star)}=(-1)^{i}f^{(i+1)}(0)=-\gen{\delta^{(i+1)},f}.\]
+Using a similar argument to the induction step, noting that $\gen{\xi,\psi}$ is independent of the choice of step function with sufficiently many vanishing derivatives, the lemma follows.
+\end{proof}
+
+\subsection{Convolution and product of generalized functions}
+\begin{nota}Given a function $f:\dbR\to\dbR$ and $t\in \dbR$, we write $\bar{f}$ for the function $\widebar{f}(x)=f(-x)$ and $L_tf $ for the function $L_tf(x)=f(x+t)$.
+\end{nota}
+
+\begin{defi}Given $f\in C_c^\infty(\dbR)$ and $\xi\in C^{-\infty}(\dbR)$, we define the convolution to be the \emph{function} $\xi\ast f(t)=\gen{\xi,\widebar{L_{-t}f}}$. 
+\end{defi}
+Note that, for $\xi=\xi_g$, this coincides with the ordinary definition \[\xi_g\ast f(t)=\int_\dbR g(x)\widebar{L_{-t}f}(x)dx=\int_{\dbR}g(x)f(t-x)dx=g\ast f(t).\]
+
+\begin{exer}Given $f\in C_c^\infty(\dbR)$ and $\xi\in C^{-\infty}(\dbR)$, show that $\xi\ast f$ is a smooth function.
+\end{exer}
+\begin{sol}Note that, for any $g\in C_c^\infty(\dbR)$, the limit
+\[\lim_{\epsilon\to 0}\frac{L_\epsilon g-g}{\epsilon}=g'\]
+is with respect to the topology of $C_c^\infty$. Indeed, we may restrict to $0<\abs{\epsilon}\le 1$, and have a common compact set supporting all functions in this net. In particular, for any $t\in \dbR$, we have that
+\begin{multline*}(\xi\ast f)'(t)=\lim_{\epsilon\to 0}\frac{\xi\ast f(t+\epsilon)-\xi\ast f(t)}{\epsilon}\\
+=\lim_{\epsilon\to 0}\gen{\xi, \frac{L_\epsilon\widebar{L_{-t}f}-\widebar{L_{-t}f}}{\epsilon}}\\
+=\gen{\xi,(\widebar{L_{-t}f})'}=\gen{\xi,\widebar{L_{-t}(f')}}=\xi\ast f'(t).
+\end{multline*}
+In particular, if $f$ is $k$-times differentiable at $t$, then so is $\xi\ast f$. 
+\end{sol}
+
+\begin{defi}[Convolution of distributions] Given two \emph{compactly supported} distributions $\xi_1,\xi_2$, define $\gen{\xi_1\ast\xi_2,f}=\gen{\xi_1,\widebar{\xi_2\ast\widebar{f}}}$.
+\end{defi}
+
+\begin{exer} Prove the following identities for $\xi,\xi_1,\xi_2,\xi_3$ compactly supported distributions.
+\begin{enumerate}
+\item $\delta_0\ast \xi=\xi\ast \delta_0=\xi$;
+\item $\delta'_0\ast \xi=\xi'$;
+\item $\xi_1\ast \xi_2=\xi_2\ast\xi_1$;
+\item $\xi_1\ast(\xi_2\ast \xi_3)=(\xi_1\ast\xi_2)\ast\xi_3$;
+\item $(\xi_1\ast \xi_2)'=\xi_1\ast\xi_2'=\xi_1'\ast\xi_2$.
+\end{enumerate}
+\end{exer}
+\begin{sol}
+\begin{enumerate}
+\item $\gen{\delta_0\ast\xi,f}=\gen{\delta_0,\widebar{\xi\ast\widebar{f}}}=\widebar{\xi\ast\widebar{f}}(0)=\xi\ast\widebar{f}(0)=\gen{\xi,L_0f}=\gen{\xi,f}.$
+
+For the second equality, we note that \[\widebar{\delta_0\ast \widebar{f}}(t)=\gen{\delta_0,\widebar{L_{t}\widebar{f}}}=\widebar{L_t\widebar{f}}(0)=\widebar{f}(-t)=f(t).\] Thus
+$\gen{\xi\ast \delta_0,f}=\gen{\xi, \widehat{\delta_0\ast\widebar{f}}}=\gen{\xi,f}.$
+\item $\gen{\delta_0'\ast\xi,f}=-(\widebar{\xi\ast\widebar{f}})'(0)=-\xi\ast(\widebar{f})'(0)=-\gen{\xi,f'}=\gen{\xi',f}$.
+\item Let $(\eta_n)_n$ be an approximation of identity.
+\begin{multline*}
+\gen{\xi_1\ast\xi_2,f}=\gen{\delta_0\ast(\xi_1\ast \delta_0), \widebar{\xi_2\ast \widebar{f}}}=\gen{\delta_0,\widebar{(\xi\ast\delta_0)\ast(\xi_2\ast\widebar{f})}}\\=\gen{\delta_0,\lim_{n\to\infty}\widebar{(\xi_1\ast\eta_n)\ast(\xi_2\ast\widebar{f})}}=\gen{\delta_0,\widebar{\lim_{n\to\infty}(\xi_2\ast\widebar{f})\ast(\xi_1\ast \eta_n)}}\\=\gen{\delta_0,\widebar{\lim_{n\to\infty}\xi_2\ast(\widebar{f}\ast(\xi_1\ast \eta_n))}}=\gen{\delta_0,\widebar{\lim_{n\to\infty}\xi_2\ast((\xi_1\ast \eta_n)\ast \widebar{f})}}\\=\gen{\delta_0,\widebar{\xi_2\ast((\xi_1\ast \delta_0)\ast \widebar{f})}}=\gen{\delta_0,\widebar{(\xi_2\ast\xi_1)\ast\widebar{f}}}=\gen{\xi_2\ast\xi_1,f}.
+\end{multline*}
+\item We first note that $(\xi_1\ast\xi_2)\ast f=\xi_1\ast(\xi_2 \ast f)$. This may be verified explicitly:
+\[((\xi_1\ast\xi_2)\ast f)(t)=\gen{\xi_1\ast\xi_2,\widebar{L_t f}}=\gen{\xi_1,\widebar{\xi_2\ast L_t f}},\]
+and $\xi_1\ast(\xi_2\ast f)(t)=\gen{\xi_1,\widebar{L_t(\xi_2\ast f)}}.$ The equality follows since
+\[(\xi_2\ast L_t f)(s)=\gen{\xi_2,\widebar{L_sL_t f}}=\gen{\xi_2,\widebar{L_{s+t}f}}=(\xi_2\ast f))(s+t)=L_t(\xi_2\ast f)(s).\]
+Associativity follows from 
+\begin{multline*}
+\gen{\xi_1\ast(\xi_2\ast\xi_3),f}=\gen{\xi_1,\widebar{(\xi_2\ast\xi_3)\ast \widebar{f}}}=\gen{\xi_1,\widebar{\xi_2\ast (\xi_3\ast \widebar{f})}}\\
+=\gen{\xi_1\ast\xi_2,\widebar{\xi_3\ast\widebar{f}}}=\gen{(\xi_1\ast\xi_2)\ast\xi_3,f}.
+\end{multline*}
+\item Follows from (2),(3) and (4).
+\end{enumerate}
+\end{sol}
+\end{document}
