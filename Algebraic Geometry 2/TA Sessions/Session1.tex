@@ -1,0 +1,374 @@
+\documentclass[12pt, draft,reqno,a4paper, twoside]{beamer}
+\usepackage{ifpdf}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm, amssymb,bm}
+\usepackage{geometry}
+\usepackage{fullpage}
+\usepackage{ucs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  filecolor=red}
+  
+\usetheme{Madrid}
+\pagestyle{empty}
+
+\theoremstyle{plain}
+\newtheorem{theo}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corol}{Corollary}
+\newtheorem{propo}{Proposition}
+\newtheorem{conj}{Conjecture}
+\newtheorem{nota}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}
+\newtheorem{exer}{Exercise}
+\newtheorem{notation}{Notation}
+\newtheorem{convention}{Convention}
+\newtheorem{remark}{Remark}
+
+
+
+%%% Famous group schemes
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\matr}{M}
+
+
+%% Common Operators
+
+\DeclareMathOperator{\Gal}{\bf Gal}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{Aut}
+\newcommand{\Span}{\operatorname{Span}}
+\DeclareMathOperator{\spec}{Spec}
+
+\renewcommand{\ker}{\mathrm{Ker}}
+\newcommand{\coker}{\mathrm{Coker}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\rad}{\mathrm{Rad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\Ql}{\underline{\dbQ_\ell}}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Cen}{\ensuremath{\mathrm{C}}}
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\cl}[1]{\mathrm{cl}\left(#1\right)}
+%\newcommand{\cl}[1]{\overline{#1}}
+
+\renewcommand{\L}{\mcal{L}}
+%% Famous Fields, Rings, Sets etc.
+
+\renewcommand{\O}{\varnothing}
+\newcommand{\dbN}{\mathbb N}
+\newcommand{\dbZ}{\mathbb Z}
+\newcommand{\dbF}{\mathbb F}
+\newcommand{\dbQ}{\mathbb Q}
+\newcommand{\dbR}{\mathbb R}
+\newcommand{\dbC}{\mathbb C}
+\newcommand{\dbA}{\mathbb A}
+\newcommand{\dbP}{\mathbb P}
+
+\newcommand{\kk}{k}
+\newcommand{\B}{\mcal{B}}
+\newcommand{\bmx}{\underline{x}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\fa}{\mathfrak{a}}
+
+%% Common Unary Functions
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inner}[1]{\left(#1\right)}
+
+
+%% Shorter font named
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mfr}{\mathfrak}
+\newcommand{\msf}{\mathsf}
+
+\newcommand{\widebar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+\newcommand{\normal}{\triangleleft}
+
+\title{Algebraic Geometry 2\\ Tutorial session 1}
+\author{Lecturer: Rami Aizenbud\\TA: Shai Shechter}
+%% 
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Introduction}
+\onslide<2->
+Unless otherwise stated, all rings in this semester are commutative and unital.
+\end{frame}
+
+
+
+\section{Recollections from Algebraic Geometry}
+\begin{frame}{Recollections from Algebraic Geometry}
+	Recall
+	\begin{defi}[Noetherian ring]
+		A ring $R$ is \textit{noetherian }if it satisfies any of the following conditions:
+		\begin{enumerate}
+			\item<1-> $R$ satisfies the ascending chain condition (ACC): for any chain of ideals $I_1\subseteq I_2\subseteq\cdots\subseteq R$ there exists $n_0\in\dbN$ such that $I_n=I_{n+1}=\cdots$;
+			\item<2-> Any ideal $I\normal R$ is  finitely generated, i.e. $I=a_1R+\cdots +a_n R$ for $a_1,\ldots,a_n\in R$; and
+			\item<3-> Every non-zero set of ideal of $R$ has a maximal element with respect to inclusion.
+		\end{enumerate}
+	\end{defi}
+\end{frame}
+
+\begin{frame}
+\begin{exer}Show that the three conditions above are equivalent.
+\end{exer}
+\begin{proof}[Solution]
+	\begin{enumerate}
+		\item\underline{(1)$\Rightarrow$(2)}: Assume towards contradiction $I\normal R$ is not finitely generated. \onslide<2-> Then, arguing by induction, we can find a sequence $(a_n)_n$ of elements of $I$ such that $\forall k: a_k\notin (a_1R+\cdots+a_{k-1}R)$. \onslide<3->Putting $I_k=a_1R+\cdots+a_k R$, we get a non-stabilizing sequence of ideals.
+		\item<4-> \underline{(2)$\Rightarrow$(3)} Let $\mcal{I}$ be a non-empty set of ideals of $R$ and take $\mcal{C}\subseteq\mcal{I}$ to be a maximal chain. \onslide<5-> Note that $I_C=\bigcup_{J\in\mcal{C}}J$ is an ideal of $R$ as well, and hence finitely generated. Therefore, $\exists I_1,\ldots,I_n\in \mcal{C}$ and $a_i\in I_i$ such that $I_C=a_1R+\cdots +a_n R$. \onslide<6-> Assuming $I_1\subseteq \cdots \subseteq I_n$, it follows that $I_C=I_n\in\mcal{C}$.
+		\item<7-> \underline{(3)$\Rightarrow$(1)} Obvious.
+	\end{enumerate}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{exer}
+		Let $R$ be a notherian ring, and let $(a_i)_{i=1}^\infty$ be a sequence in $R$. Then there exists $n_0\in\dbN$ such that $(a_i)_{i=1}^\infty$ is included in $a_1R+\ldots+a_{n_0}R$.
+		
+		\onslide<2-> That is, for any $k\in\dbN$, there exist $r_1,\ldots,r_{n_0}\in R$ such that $a_k=\sum_{i=1}^{n_0}r_i a_i$.
+	\end{exer}
+\onslide<3->
+	\begin{proof}[Solution]
+		The sequence of ideals $I_k=\gen{a_1,\ldots,a_k}$ is ascending and hence stabilizes. In particular, taking $n_0$ to be such that $I_{n_0}=I_{n_0+1}=\cdots$, for any $k>n_0$ we have $a_k\in I_k=I_{n_0}$. 
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{theo}[Hilbert Basis Theorem]
+		Let $R$ be a noetherian ring. Then $R[x]$, the ring of polynomials over $R$, is also noetherian.
+	\end{theo}	
+	\onslide<2->
+	\begin{corol}
+		The ring $k[x_1,\ldots,x_n]$ is noetherian for any field $k$ and $n\in\dbN$.
+	\end{corol}
+\end{frame}
+
+\begin{frame}{Proof of HBT}
+\onslide<1->	Let $I$ be an ideal of $R[x]$. \onslide<2-> We want to show $I$ is finitely generated.
+
+\onslide<3-> Pick a sequence $(f_i)_{i=1}^n$ of polynomials in $I$ in the following manner:
+\begin{itemize}
+	\item<4-> Take $f_1$ to be a polynomial of minimal degree in $I$.
+	\item<5-> If $I=\gen{f_1}$ we are done; otherwise, take $f_2\in I\setminus\gen{f_1}$ of minimal degree.
+	\item<6-> Continue inductively- assuming $f_1,\ldots,f_n\in I$ are chosen, if $I\ne\gen{f_1,\ldots,f_n}$, take $f_{n+1}\in I\setminus\gen{f_1,\ldots,f_n}$ of minimal degree in this set. 
+\end{itemize}
+	\onslide<7-> \textbf{Note:} $\deg(f_1)\le\cdots\le\deg(f_n)\le\cdots$
+\end{frame}
+
+\begin{frame}{Proof of HBT - contd}
+	For any $i\in\dbN$, let $a_i\in R$ be the \textit{leading coefficient} of $f_i$. \onslide<2-> By 1the previous exercise, there exists $n_0$ such that the sequence $(a_i)_{i=1}^\infty$ is included in $\gen{a_1,\ldots,a_{n_0}}$. 
+	
+	\onslide<3->
+	\begin{claim}
+		$I$ is generated by $f_1,\ldots, f_{n_0}$. 
+	\end{claim}
+\onslide<4->
+	\begin{proof}
+		\onslide<5->Assume not, and consider $f_{n_0+1}$ with leading coefficient $a_{n_0+1}$. Write $a_{n_0+1}=\sum_{i=1}^{n_0}r_i a_i$. \onslide<6-> Write $J=\gen{f_1,\ldots,f_{n_0}}$ and recall that $f_{n_0+1}$ has minimal degree in $I\setminus J$. 
+		
+		\onslide<7-> Define $g(x)=\sum_{i=1}^{n_0}r_i \cdot x^{\deg f_{n_0+1}-\deg f_i}\cdot f_i(x)$. Then $g\in J$, thus $f_{n_0+1}-g\notin J$.
+		
+		\onslide<8->What is the leading coefficient of $g$? \onslide<9->It is \textit{also} $a_{n_0+1}$. Therefore, $\deg(f_{n_0+1}-g)<\deg(f_{n_0+1})$. A contradiction.
+	\end{proof}
+\end{frame}
+
+\begin{frame}{Hilbert's Nullstellensatz}
+Let $K$ be an algebraically closed field.
+\begin{theo}[Hilbert's Nullstellensatz]
+\onslide<2->	Let $\set{p_i}$ be a collection of polynomials in $K[\bmx]=K[x_1,\ldots,x_n]$. Assume $f\in K[\bmx]$ is another polynomial such that for any $y\in K^n$, if $p_i(y)=0$ for all $i$, then $f(y)=0$. \onslide<3-> Then, there exist $r\in\dbN$ and $g_i\in K[\bmx]$ ($g_i=0$ for a.e.~$i$) such that $f^r=\sum_i g_ip_i$.
+\end{theo}
+
+\onslide<4-> Writing $I$ for the ideal $\gen{p_i}$, we have the following, more compact form:\onslide<5->
+\begin{theo}[Nullstellensatz- slogan form]
+	$I(V(I))=\sqrt{I}$. 
+\end{theo}
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	Consider $p_1(x,y)=x+y,\:p_2(x,y)=(x-y)^3$, and take $f(x)=x$. Assuming $\mathrm{Char}(K)\ne 2$, if $p_1(x,y)=p_2(x,y)=0$ then necessarily $x=0$. Therefore $x^r\in \gen{x+y,(x-y)^3}$ for some $r$.
+	\bigskip
+	
+	\onslide<2-> Is this obvious from computation?
+	\onslide<3->
+	\[(x+y)\frac{7x^2-4xy+y^2}{8}+\frac{1}{8}(x-y)^3=x^3.\]
+\end{example}
+\end{frame}
+
+\begin{frame}{Hilbert's Nullstellensatz}
+Let us prove the specific case where $f=0$, i.e.:
+\begin{theo}[Weak Nullstellensatz]
+	Let $\set{p_i}$ be a collection of polynomials in $K[\bmx]=K[x_1,\ldots,x_n]$. Assume that $I=\gen{p_i}\neq K[\bmx]$. Then there exists $y\in K^n$ such that $p_i(y)=0$ for all $i$. 
+\end{theo}
+\begin{remark}
+	The proof we show is based on \url{http://aizenbud.org/4Publications/NSS.pdf}. The condition of the theorem in this link is formulated slightly differently.
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\begin{lem}
+	Let $K$ be an infinite field, and assume $p\in K[\bmx]$ is a non-zero polynomial. Then $\exists y\in K^n: p(y)\ne 0$. 
+\end{lem}
+\onslide<2->
+\begin{proof}
+	By induction on the number of variables. The case $n=1$ is clear.
+	\onslide<3-> Write \[p(\bmx)=p(x_1,\ldots,x_n)=\sum_{i=0}^D a_i(x_1,\ldots,x_{n-1})x_n^i\]
+	with $a_D\ne 0$. \onslide<4-> By induction, $\exists y'\in K^{n-1}$ such that $a_D(y')\ne 0$. 
+	
+	\onslide<5-> Consider $f(t)=p(y',t)\in K[t]$, a polynomial in one variable.
+	
+	\onslide<6-> Then $f$ has a non-zero leading coefficient, hence $\exists y''\in K$ such that $f(y'')=p(y',y'')\ne 0$. 
+\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{lem}
+		Let $L/K$ be a finitely generated extension of fields (i.e. $L$ is a quotient of a polynomial ring over $K$). The $L$ is isomorphic to a finite extension of $K(t_1,\ldots,t_m)$, the field of rational functions in $m$ variables over $K$.
+	\end{lem}
+	\onslide<2->
+	\begin{proof}
+		Omitted.
+	\end{proof}
+\end{frame}
+
+\begin{frame}{Proof of w-Nullstellensatz}
+	Wlog, assume $I\normal K[\bmx]$ is maximal, and put $L=K[\bmx]/I$ and $\alpha=(\alpha_1,\ldots,\alpha_n)\in L^n$ be the image of $\bmx$ modulo $I^n$. \onslide<2->  Note that $\alpha$ is a common solution to $\set{p_i}$ in $L^n$.
+	
+	\bigskip
+	\onslide<2-> By the last lemma, $L$ is isomorphic to a finite extension of $K(t_1,\ldots,t_m)$. Let $e_1,\ldots,e_k$ be a vector space basis for $L$ over $K(t_1,\ldots,t_m)$ with $e_1=1$. \onslide<3-> write
+	\[\alpha_i=\sum_{j} m_{ij}(t_1,\ldots,t_m) e_j\quad \text{and}\quad e_ie_j=\sum_{h}b_{ijh}(t_1,\ldots,t_m)e_h\]
+	with $m_{ij},b_{ijh}\in K(t_1,\ldots,t_m)$. \onslide<4-> Let $d$ be their common denominator, and use the first lemma to find $y\in K^m$ such that $d(y)\ne 0$. 
+\end{frame}
+
+\begin{frame}{Proof of w-Nullstellensatz}
+	We use the information we have thus far to construct a new algebra over $K$ where the polynomials $\set{p_i}$ have a common zero.
+	\bigskip
+	\onslide<2-> Let $A=K^k$ with $\set{c_1,\ldots,c_k}$ a basis, and define a (commutative and unital) ring structure on $K^k$ by setting $c_ic_j=\sum_h b_{ijh}(y)c_h$ (\textit{Exercise: verify that this is well defined}). \onslide<3-> Put $s_i=\sum_{j}m_{ij}(y)c_j$. Then $p_i(s_1,\ldots,s_m)=p_i(\alpha)(y)$ is the evaluation at $y$ of a zero rational function. Thus, $s=(s_1,\ldots,s_m)$ is a common zero of $\set{p_i}$ in $A^n$.
+	
+	\bigskip
+	\onslide<4->Now, let $F$ be the quotient of $A$ by some maximal ideal. \onslide<5-> The image of $s$ in $F$ is again a common zero of $\set{p_i}$. But $F$ is a \textit{finite} field extension of $K$, and $K$ is algebraically closed. Thus $F\simeq K$ and we are done.
+\end{frame}
+
+\begin{frame}{The Strong Nullstellensatz}
+The Nullstellensatz, as presented earlier, in fact follows from the weak Nullstellensatz. Commonly, this is shown using the following.
+\begin{block}{Rabinowitsch Trick}
+\begin{itemize}
+\item<2->\textbf{Step 1}: If $p_1,\ldots,p_m\in K[\bmx]$ are given and $f$ vanishes whenever the $p_i$'s do, then the polynomials 
+\[p_1,\ldots,p_m,1-x_0f(\bmx)\in K[x_0,x_1,\ldots,x_n]\]
+have no common zeros. By w-NSS, they generate the unit ideal.
+\item<3->\textbf{Step 2}: We get an equality of polynomials:
+\[1=g_0(x_0,\ldots,x_n)(1-x_0f(\bmx))+\sum_{i=1}^m g_i(x_0,\ldots,x_n)p_i(\bmx).\]
+\item<4->\textbf{Step 3}: Substitute $x_0=1/f(\bmx)$ in $\kk(\bmx)$. NSS follows.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Corollary of NSS}
+Over an algebraically closed field $K$, we have an \textit{equivalence}: 
+\begin{align*}\set{\substack{\text{Closed subvarieties of}\\K^n\text{ for some }n}}\quad&\leftrightarrow\quad\set{\substack{\text{Finitely generated}\\\text{reduced $K$-algebras}}}
+\intertext{
+given by }
+V\quad&\mapsto \quad K[\bmx]/I(V)
+\end{align*}
+\onslide<2->
+\begin{block}{Question}
+	What happens if we consider $K$ non-a.c? What about arbitrary $K$-algebras?
+\end{block}
+\end{frame}
+
+\begin{frame}{The spectrum of a ring}
+Let $R$ be a commutative unital ring. 
+\begin{defi}
+	The spectrum of $R$ is the set 
+	\[\spec(R)=\set{\fp\normal R:\fp\text{ prime}}.\]
+\end{defi}
+\onslide<2->
+\begin{examples}
+	\begin{enumerate}
+		\item<2-> $\spec(k)=\set{\ast}$ for any field $k$.
+		\item<3-> $\spec(k[\bmx])\sim\set{\text{irreducibe monic polynomials in }\bmx}\sqcup\set{0}$
+		\item<4-> $\spec(\dbZ)=\set{\gen{0}}\sqcup\set{\gen{p}:{p\text{ prime}}}$.
+	\end{enumerate}
+\end{examples}
+\end{frame}
+
+\begin{frame}{The spectrum of a ring - topology}
+
+Given $I\normal R$, define $V(I):=\set{\fp\in\spec(R):I\subseteq \fp}$.\begin{exer}\onslide<2-> 
+\begin{enumerate}
+	\item<2-> $V((0))=R$ and $V(R)=\emptyset$.
+	\item<3-> $V(IJ)=V(I)\cup V(J)$. 
+	\item<4-> Given a collection $\set{I_\alpha}$ of ideals, $V(\sum I_\alpha)=\bigcap V(I_\alpha)$.
+\end{enumerate}
+\end{exer}
+\onslide<5->\begin{proof}
+	\begin{enumerate}
+		\item<6-> Clear;
+		\item<7-> $\supseteq$ is clear, if $\fp\supseteq I$ then $\fp\supseteq IJ$ (similarly if $\fp\supseteq J$). \onslide<8-> Conversely, assume $IJ\subseteq\fp$ and $I\not\subseteq \fp$. Take $x\in I\setminus\fp$, and $y\in J$. Then $xy\in IJ\subseteq\fp$ implies $y\in\fp$, since $\fp$ is prime.
+		\item<9-> $\supseteq$: $\fp\in\bigcap_\alpha V(I_\alpha)$ implies $\fp\supseteq \bigcup I_\alpha\supseteq \sum I_\alpha$. 
+		
+		\onslide<10-> $\subseteq$: Since $I_{\alpha_0}\subseteq\sum I_\alpha$ for all $\alpha_0$, $\fp\in V(\sum I_\alpha)$ implies $\fp\in V(I_{\alpha_0})$ for all $\alpha_0$. 
+		
+	\end{enumerate}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+The collection $\set{V(I):I\normal R}$ is the set of closed sets for a topology on $\spec(R)$, which is known as the \textit{Zariski Topolgy }of $R$. 
+\end{frame}
+\begin{frame}
+	\begin{exer}
+		Let $R$ be a ring.
+		\begin{enumerate}
+			\item Show that $\overline{\set{\fp}}=V(\fp)$, for all $\fp\in\spec(R)$ and, in particular, that $\set{\fp}$ is closed iff $\fp$ is maximal.
+			\item Show that, if $R$ is a domain, then $\set{(0)}$ is a \underline{dense} point. 
+		\end{enumerate}
+	\end{exer}
+\onslide<2->
+\begin{proof}[Solution]
+	\begin{enumerate}
+		\item<3-> By definition, and by the previous exercise:\[\overline{\fp}=\bigcap_{\fp\in F\text{ closed}} F=\bigcap_{\substack{I\normal R\\ I\subseteq \fp}}V(I)=V(\sum_{I\subseteq\fp} I)=V(\fp).\]
+		In particular, $\set{\fp}$ is closed iff $\set{\fp}=V(\fp)$ which occurs iff $\fp$ is maximal (o/w, take $\mfr{m}\supsetneq \fp$ maximal).
+		\item<4-> Note: $(0)\in\spec(R)$ iff $R$ is a domain, in which case $V(0)=R$. 
+	\end{enumerate}
+\end{proof}
+\end{frame}
+\begin{frame}
+\centering{
+\huge{Questions?}}
+\end{frame}
+\end{document}
